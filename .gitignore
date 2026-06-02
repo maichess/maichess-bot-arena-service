@@ -3,7 +3,8 @@ obj/
 /packages/
 riderModule.iml
 /_ReSharper.Caches/
-
 .idea
 .env
-MaichessUserService/Load-Env.ps1
+Load-Env.ps1
+.env_prod
+MaichessBotArenaService.Tests/coverage.json
