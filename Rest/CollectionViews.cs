@@ -6,16 +6,32 @@ internal static class CollectionViews
 {
     internal sealed record TimeFormatView(string Id, long BaseMs, long IncrementMs, string Category);
 
-    internal sealed record ConfigView(
-        IReadOnlyList<string>? BotIds,
-        string? WhiteBotId,
-        string? BlackBotId,
+    internal sealed record SingleConfigView(
+        string WhiteBotId,
+        string BlackBotId,
         IReadOnlyList<string> FenList,
         int GamesPerFen,
-        int FensPerStage,
-        string? ColorMode,
         bool KeepSwitchingColors,
         TimeFormatView TimeFormat);
+
+    internal sealed record MatrixConfigView(
+        IReadOnlyList<string> BotIds,
+        IReadOnlyList<string> FenList,
+        int GamesPerFen,
+        TimeFormatView TimeFormat);
+
+    internal sealed record TournamentConfigView(
+        IReadOnlyList<string> BotIds,
+        IReadOnlyList<string> FenList,
+        int FensPerStage,
+        string ColorMode,
+        TimeFormatView TimeFormat);
+
+    // Exactly one branch is populated, selected by the collection's setup type.
+    internal sealed record ConfigView(
+        TournamentConfigView? Tournament,
+        MatrixConfigView? Matrix,
+        SingleConfigView? Single);
 
     internal sealed record Progress(int TotalGames, int FinishedGames, int RunningGames, int PendingGames);
 
@@ -43,6 +59,12 @@ internal static class CollectionViews
 
     internal sealed record Bracket(IReadOnlyList<BracketRound> Rounds, string? WinnerBotId);
 
+    // Exactly one branch is populated, selected by the collection's setup type.
+    internal sealed record ResultView(
+        Bracket? Bracket,
+        MatrixTable? MatrixTable,
+        SingleSeries? SingleSeries);
+
     internal sealed record Summary(
         string Id,
         string Name,
@@ -61,9 +83,7 @@ internal static class CollectionViews
         string Status,
         long CreatedAtMs,
         long FinishedAtMs,
-        Progress Progress,
         ConfigView Config,
-        SingleSeries? SingleSeries,
-        MatrixTable? MatrixTable,
-        Bracket? Bracket);
+        Progress Progress,
+        ResultView Result);
 }

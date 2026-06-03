@@ -29,18 +29,19 @@ public sealed class ResultViewBuilderTests
         CollectionViews.Detail detail = new ResultViewBuilder(new FakeArenaRandomProvider()).BuildDetail(collection, games);
 
         Assert.Equal("single", detail.Type);
-        Assert.NotNull(detail.SingleSeries);
-        Assert.Equal(1.5, detail.SingleSeries!.BotAScore);
-        Assert.Equal(1.5, detail.SingleSeries.BotBScore);
-        Assert.Equal(["white_won", "black_won", "draw", "ongoing"], detail.SingleSeries.Games.Select(game => game.Result));
+        Assert.NotNull(detail.Result.SingleSeries);
+        Assert.Equal(1.5, detail.Result.SingleSeries!.BotAScore);
+        Assert.Equal(1.5, detail.Result.SingleSeries.BotBScore);
+        Assert.Equal(["white_won", "black_won", "draw", "ongoing"], detail.Result.SingleSeries.Games.Select(game => game.Result));
         Assert.Equal(4, detail.Progress.TotalGames);
         Assert.Equal(3, detail.Progress.FinishedGames);
         Assert.Equal(1, detail.Progress.RunningGames);
-        Assert.Equal("a", detail.Config.WhiteBotId);
-        Assert.Null(detail.Config.BotIds);
-        Assert.Null(detail.Config.ColorMode);
-        Assert.Null(detail.MatrixTable);
-        Assert.Null(detail.Bracket);
+        Assert.NotNull(detail.Config.Single);
+        Assert.Equal("a", detail.Config.Single!.WhiteBotId);
+        Assert.Null(detail.Config.Matrix);
+        Assert.Null(detail.Config.Tournament);
+        Assert.Null(detail.Result.MatrixTable);
+        Assert.Null(detail.Result.Bracket);
     }
 
     [Fact]
@@ -61,12 +62,13 @@ public sealed class ResultViewBuilderTests
         CollectionViews.Detail detail = new ResultViewBuilder(new FakeArenaRandomProvider()).BuildDetail(collection, games);
 
         Assert.Equal("matrix", detail.Type);
-        Assert.NotNull(detail.MatrixTable);
-        Assert.Equal(3, detail.MatrixTable!.Cells.Count);
-        Assert.Equal(["a", "b", "c"], detail.MatrixTable.BotIds);
-        Assert.Null(detail.Config.WhiteBotId);
-        Assert.Equal(["a", "b", "c"], detail.Config.BotIds);
-        Assert.Null(detail.SingleSeries);
+        Assert.NotNull(detail.Result.MatrixTable);
+        Assert.Equal(3, detail.Result.MatrixTable!.Cells.Count);
+        Assert.Equal(["a", "b", "c"], detail.Result.MatrixTable.BotIds);
+        Assert.NotNull(detail.Config.Matrix);
+        Assert.Null(detail.Config.Single);
+        Assert.Equal(["a", "b", "c"], detail.Config.Matrix!.BotIds);
+        Assert.Null(detail.Result.SingleSeries);
     }
 
     [Fact]
@@ -96,11 +98,12 @@ public sealed class ResultViewBuilderTests
         CollectionViews.Detail detail = new ResultViewBuilder(new FakeArenaRandomProvider()).BuildDetail(collection, games);
 
         Assert.Equal("tournament", detail.Type);
-        Assert.NotNull(detail.Bracket);
-        Assert.Equal("a", detail.Bracket!.WinnerBotId);
-        Assert.Equal(2, detail.Bracket.Rounds.Count);
-        Assert.Contains(detail.Bracket.Rounds[0].Pairings, pairing => pairing.Bye);
-        Assert.Equal("both_colors", detail.Config.ColorMode);
+        Assert.NotNull(detail.Result.Bracket);
+        Assert.Equal("a", detail.Result.Bracket!.WinnerBotId);
+        Assert.Equal(2, detail.Result.Bracket.Rounds.Count);
+        Assert.Contains(detail.Result.Bracket.Rounds[0].Pairings, pairing => pairing.Bye);
+        Assert.NotNull(detail.Config.Tournament);
+        Assert.Equal("both_colors", detail.Config.Tournament!.ColorMode);
     }
 
     [Fact]
@@ -111,9 +114,10 @@ public sealed class ResultViewBuilderTests
 
         CollectionViews.Detail detail = new ResultViewBuilder(new FakeArenaRandomProvider()).BuildDetail(collection, games);
 
-        Assert.Null(detail.Bracket!.WinnerBotId);
-        Assert.All(detail.Bracket.Rounds[0].Pairings, pairing => Assert.Null(pairing.WinnerBotId));
-        Assert.Equal("random", detail.Config.ColorMode);
+        Assert.Null(detail.Result.Bracket!.WinnerBotId);
+        Assert.All(detail.Result.Bracket.Rounds[0].Pairings, pairing => Assert.Null(pairing.WinnerBotId));
+        Assert.NotNull(detail.Config.Tournament);
+        Assert.Equal("random", detail.Config.Tournament!.ColorMode);
     }
 
     private static async Task<(ArenaCollection, IReadOnlyList<ArenaGame>)> RunTournamentAsync(

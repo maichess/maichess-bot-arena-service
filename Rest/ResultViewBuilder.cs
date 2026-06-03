@@ -22,11 +22,9 @@ internal sealed class ResultViewBuilder(IArenaRandomProvider randomProvider)
             collection.Status,
             collection.CreatedAtMs,
             collection.FinishedAtMs,
-            BuildProgress(games),
             BuildConfig(collection),
-            single,
-            matrix,
-            bracket);
+            BuildProgress(games),
+            new ResultView(bracket, matrix, single));
     }
 
     internal static Summary BuildSummary(ArenaCollection collection, IReadOnlyList<ArenaGame> games) =>
@@ -108,24 +106,42 @@ internal sealed class ResultViewBuilder(IArenaRandomProvider randomProvider)
 
     private static ConfigView BuildConfig(ArenaCollection collection)
     {
-        string? colorMode = collection.Kind == SetupKind.Tournament
-            ? collection.ColorMode == TournamentColorMode.Random ? "random" : "both_colors"
-            : null;
+        TimeFormatView timeFormat = new(
+            collection.TimeFormat.Id,
+            collection.TimeFormat.BaseMs,
+            collection.TimeFormat.IncrementMs,
+            collection.TimeFormat.Category);
 
-        return new ConfigView(
-            collection.Kind == SetupKind.Single ? null : collection.BotIds,
-            collection.Kind == SetupKind.Single ? collection.WhiteBotId : null,
-            collection.Kind == SetupKind.Single ? collection.BlackBotId : null,
-            collection.FenList,
-            collection.GamesPerFen,
-            collection.FensPerStage,
-            colorMode,
-            collection.KeepSwitchingColors,
-            new TimeFormatView(
-                collection.TimeFormat.Id,
-                collection.TimeFormat.BaseMs,
-                collection.TimeFormat.IncrementMs,
-                collection.TimeFormat.Category));
+        return collection.Kind switch
+        {
+            SetupKind.Single => new ConfigView(
+                null,
+                null,
+                new SingleConfigView(
+                    collection.WhiteBotId,
+                    collection.BlackBotId,
+                    collection.FenList,
+                    collection.GamesPerFen,
+                    collection.KeepSwitchingColors,
+                    timeFormat)),
+            SetupKind.Matrix => new ConfigView(
+                null,
+                new MatrixConfigView(
+                    collection.BotIds,
+                    collection.FenList,
+                    collection.GamesPerFen,
+                    timeFormat),
+                null),
+            _ => new ConfigView(
+                new TournamentConfigView(
+                    collection.BotIds,
+                    collection.FenList,
+                    collection.FensPerStage,
+                    collection.ColorMode == TournamentColorMode.Random ? "random" : "both_colors",
+                    timeFormat),
+                null,
+                null),
+        };
     }
 
     private static Progress BuildProgress(IReadOnlyList<ArenaGame> games) =>
