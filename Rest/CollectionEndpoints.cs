@@ -48,10 +48,10 @@ internal static class CollectionEndpoints
 
     private static async Task<IResult> List(
         [FromQuery] string? status,
-        [FromQuery] int limit,
-        [FromQuery] int offset,
         CollectionService service,
-        CancellationToken ct)
+        CancellationToken ct,
+        [FromQuery] int limit = 0,
+        [FromQuery] int offset = 0)
     {
         IReadOnlyList<ArenaCollection> collections =
             await service.ListAsync(string.IsNullOrEmpty(status) ? null : status, limit, offset, ct);
