@@ -5,7 +5,7 @@ The arena contract (`protos/bot-arena-service/v1/arena.proto`,
 implemented as specified in `maichess-api-contracts` at version `0.4.0`. No open
 blockers.
 
-## Resolved deviations from `feature-prompts/04-bot-arena-service.md`
+## Resolved deviations from `maichess-knowledge-base/tasks/implemented/04-bot-arena-service.md`
 
 These were corrections to the prompt, agreed with the maintainer before the
 `v0.4.0` contract was published:
