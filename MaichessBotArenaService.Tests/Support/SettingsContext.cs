@@ -1,5 +1,7 @@
 using MaichessBotArenaService.Arena;
 using MaichessBotArenaService.Persistence;
+using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Options;
 using NSubstitute;
 
 namespace MaichessBotArenaService.Tests.Support;
@@ -17,7 +19,8 @@ internal sealed class SettingsContext
 
     internal SettingsContext()
     {
-        Service = new ArenaSettingsService(Store);
+        IMemoryCache memoryCache = new MemoryCache(Options.Create(new MemoryCacheOptions()));
+        Service = new ArenaSettingsService(Store, memoryCache);
         Store.GetConcurrencyLimitAsync(Arg.Any<CancellationToken>()).Returns(Task.FromResult<int?>(null));
     }
 }

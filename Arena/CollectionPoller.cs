@@ -17,9 +17,23 @@ internal sealed class CollectionPoller(
     {
         while (!stoppingToken.IsCancellationRequested)
         {
-            foreach (ArenaGame game in await store.ListRunningGamesAsync(stoppingToken))
+            IReadOnlyList<ArenaGame> games = await store.ListRunningGamesAsync(stoppingToken);
+
+            // Fan out all gRPC outcome reads in parallel — each call is independent
+            // and read-only. Sequential reads were the main source of poll-cycle
+            // saturation for large tournaments (N*RTT per 2-second tick).
+            (ArenaGame Game, MatchOutcome? Outcome)[] results = await Task.WhenAll(
+                games.Select(async game =>
+                {
+                    MatchOutcome? outcome = await reader.ReadAsync(game.MatchId, stoppingToken);
+                    return (game, outcome);
+                }));
+
+            // Apply completions sequentially — HandleFinishedGameAsync mutates
+            // collection state and launching logic; concurrent mutations to the
+            // same collection would race on AdvanceAsync.
+            foreach ((ArenaGame game, MatchOutcome? outcome) in results)
             {
-                MatchOutcome? outcome = await reader.ReadAsync(game.MatchId, stoppingToken);
                 if (outcome is not null)
                 {
                     await service.HandleFinishedGameAsync(game, outcome, stoppingToken);

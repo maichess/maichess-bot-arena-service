@@ -37,6 +37,7 @@ builder.Services.AddSingleton<IBotCatalog, EngineBotCatalog>();
 builder.Services.AddSingleton<IMatchOutcomeReader, MatchManagerOutcomeReader>();
 builder.Services.AddSingleton<IArenaRandomProvider, DefaultArenaRandomProvider>();
 builder.Services.AddSingleton(new ServiceTokenMinter(jwtKey));
+builder.Services.AddMemoryCache();
 builder.Services.AddSingleton<ArenaSettingsService>();
 builder.Services.AddSingleton<CollectionService>();
 builder.Services.AddSingleton<ResultViewBuilder>();
