@@ -10,8 +10,9 @@ game through Match Maker's bot-vs-bot path and collecting results into stored
 - **gRPC model:** `maichess-api-contracts/protos/bot-arena-service/v1/arena.proto`
   (`maichess.bot_arena.v1`) — source of truth for the data model.
 - **Consumes:** Match Maker REST `POST /matches/bot-vs-bot` (game creation),
-  Match Manager gRPC `GetMatch` (outcome observation), Engine gRPC `ListBots`
-  (bot validation), Database Service gRPC (`arena-db` instance, persistence).
+  `match.events.v1` Kafka `MatchEnded` events (completion observation), Engine
+  gRPC `ListBots` (bot validation), Database Service gRPC (`arena-db` instance,
+  persistence).
 - **Generated stubs:** `Maichess.PlatformProtos` (see `maichess-api-contracts/dotnet/`).
 
 Implement against these contracts exactly. Document blockers in `CONTRACT_NOTES.md`.
@@ -24,7 +25,12 @@ Implement against these contracts exactly. Document blockers in `CONTRACT_NOTES.
   direct DB driver.
 - **Game creation:** HTTP to Match Maker (`Services:MatchMaker`), authenticated
   with a short-lived JWT minted from the shared `Jwt:Key` for the setup creator.
-- **Outcome observation:** Match Manager gRPC (`Services:MatchManager`).
+- **Completion observation:** a Kafka consumer (`Kafka/ArenaMatchCompletionConsumer`,
+  group `bot-arena-completion`) reacts to `MatchEnded` on `match.events.v1` for games
+  the arena spawned, replacing the old 2-second `GetMatch` poll (Kafka task 18). The
+  pure routing decision lives in `Kafka/ArenaMatchCompletionProjection`. `KAFKA_BOOTSTRAP`
+  is injected by the deployment when `kafka.enabled`. `MatchEnded` carries the final
+  clocks and FEN (contracts >= 0.11.0), so tournament tie-breaks keep full fidelity.
 
 ## Setup semantics
 

@@ -2,6 +2,8 @@ using MaichessBotArenaService.Arena;
 using MaichessBotArenaService.Domain;
 using MaichessBotArenaService.Rest;
 using MaichessBotArenaService.Tests.Support;
+using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Options;
 using Xunit;
 
 namespace MaichessBotArenaService.Tests;
@@ -126,7 +128,8 @@ public sealed class ResultViewBuilderTests
         FakeArenaStore store = new();
         FakeBotCatalog catalog = new();
         catalog.Bots.UnionWith(bots.Split(','));
-        ArenaSettingsService settings = new(store);
+        IMemoryCache cache = new MemoryCache(Options.Create(new MemoryCacheOptions()));
+        ArenaSettingsService settings = new(store, cache);
         CollectionService service = new(
             store, new FakeGameLauncher(), catalog, settings, new FakeArenaRandomProvider(), () => 1000);
 

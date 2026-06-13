@@ -78,4 +78,7 @@ internal sealed class FakeArenaStore : IArenaStore
         IReadOnlyList<ArenaGame> result = [.. games.Values.Where(g => g.Status == "running")];
         return Task.FromResult(result);
     }
+
+    public Task<ArenaGame?> TryGetRunningGameAsync(string matchId, CancellationToken ct) =>
+        Task.FromResult(games.Values.FirstOrDefault(g => g.MatchId == matchId && g.Status == "running"));
 }

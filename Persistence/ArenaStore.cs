@@ -132,6 +132,16 @@ internal sealed class ArenaStore(Database.DatabaseClient db) : IArenaStore
         return [.. response.Records.Select(ToGame)];
     }
 
+    public async Task<ArenaGame?> TryGetRunningGameAsync(string matchId, CancellationToken ct)
+    {
+        Struct filter = new();
+        filter.Fields["match_id"] = Value.ForString(matchId);
+        filter.Fields["status"] = Value.ForString("running");
+        ListResponse response = await db.ListAsync(
+            new ListRequest { Collection = GamesCollection, Filter = filter, Limit = 1 }, cancellationToken: ct);
+        return response.Records.Count > 0 ? ToGame(response.Records[0]) : null;
+    }
+
     private async Task<Struct?> FindConcurrencyRecordAsync(CancellationToken ct)
     {
         Struct filter = new();

@@ -4,9 +4,9 @@ using System.Text.Json.Serialization;
 using Grpc.Net.Client;
 using Maichess.Database.V1;
 using Maichess.Engine.V1;
-using Maichess.MatchManager.V1;
 using MaichessBotArenaService.Arena;
 using MaichessBotArenaService.Clients;
+using MaichessBotArenaService.Kafka;
 using MaichessBotArenaService.Persistence;
 using MaichessBotArenaService.Rest;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -19,8 +19,6 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 string dbServiceUrl = builder.Configuration["Services:DatabaseService"]
     ?? throw new InvalidOperationException("Services:DatabaseService is not configured");
-string matchManagerUrl = builder.Configuration["Services:MatchManager"]
-    ?? throw new InvalidOperationException("Services:MatchManager is not configured");
 string engineUrl = builder.Configuration["Services:Engine"]
     ?? throw new InvalidOperationException("Services:Engine is not configured");
 string matchMakerUrl = builder.Configuration["Services:MatchMaker"]
@@ -30,11 +28,9 @@ string jwtKey = builder.Configuration["Jwt:Key"]
 
 builder.Services.AddSingleton(new Database.DatabaseClient(GrpcChannel.ForAddress(dbServiceUrl)));
 builder.Services.AddSingleton(new Bots.BotsClient(GrpcChannel.ForAddress(engineUrl)));
-builder.Services.AddSingleton(new Matches.MatchesClient(GrpcChannel.ForAddress(matchManagerUrl)));
 
 builder.Services.AddSingleton<IArenaStore, ArenaStore>();
 builder.Services.AddSingleton<IBotCatalog, EngineBotCatalog>();
-builder.Services.AddSingleton<IMatchOutcomeReader, MatchManagerOutcomeReader>();
 builder.Services.AddSingleton<IArenaRandomProvider, DefaultArenaRandomProvider>();
 builder.Services.AddSingleton(new ServiceTokenMinter(jwtKey));
 builder.Services.AddMemoryCache();
@@ -46,7 +42,10 @@ builder.Services.AddSingleton<Func<long>>(_ => () => DateTimeOffset.UtcNow.ToUni
 builder.Services.AddHttpClient<IGameLauncher, MatchMakerGameLauncher>(client =>
     client.BaseAddress = new Uri(matchMakerUrl));
 
-builder.Services.AddHostedService<CollectionPoller>();
+// Event-driven completion: react to MatchEnded on match.events.v1 instead of
+// polling match-manager over gRPC. KAFKA_BOOTSTRAP is injected by the deployment
+// macro when kafka.enabled (consumer group "bot-arena-completion").
+builder.Services.AddHostedService<ArenaMatchCompletionConsumer>();
 
 builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

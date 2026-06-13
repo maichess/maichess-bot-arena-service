@@ -1,4 +1,6 @@
 using MaichessBotArenaService.Arena;
+using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Options;
 using Xunit;
 
 namespace MaichessBotArenaService.Tests.Support;
@@ -25,7 +27,8 @@ internal sealed class CollectionContext
 
     internal CollectionContext()
     {
-        ArenaSettingsService settings = new(Store);
+        IMemoryCache cache = new MemoryCache(Options.Create(new MemoryCacheOptions()));
+        ArenaSettingsService settings = new(Store, cache);
         Service = new CollectionService(Store, Launcher, Catalog, settings, new FakeArenaRandomProvider(), () => Now);
     }
 

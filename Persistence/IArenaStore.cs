@@ -38,7 +38,11 @@ internal interface IArenaStore
     // in-flight count for the concurrency cap).
     Task<int> CountRunningGamesAsync(CancellationToken ct);
 
-    // Lists all games in the "running" state across all collections (used by the
-    // poller to observe completions).
+    // Lists all games in the "running" state across all collections.
     Task<IReadOnlyList<ArenaGame>> ListRunningGamesAsync(CancellationToken ct);
+
+    // Returns the running game for a match id, or null when the arena is not
+    // running a game for it. Used by the match-completion consumer, which only
+    // reacts to completions of games the arena itself spawned.
+    Task<ArenaGame?> TryGetRunningGameAsync(string matchId, CancellationToken ct);
 }
