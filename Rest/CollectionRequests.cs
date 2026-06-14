@@ -21,6 +21,7 @@ internal static class CollectionRequests
         IReadOnlyList<string>? BotIds,
         IReadOnlyList<string>? FenList,
         int GamesPerFen,
+        string? ColorMode,
         string? TimeFormatId);
 
     internal sealed record Single(

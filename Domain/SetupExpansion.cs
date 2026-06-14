@@ -37,12 +37,16 @@ internal static class SetupExpansion
     }
 
     // Matrix setup: every unordered bot pair (in input order), for each FEN,
-    // `gamesPerFen` games with colors alternating per game continuously within
-    // the pairing (across its FENs).
+    // `gamesPerFen` games. `randomColors` chooses the color-assignment strategy:
+    // when false (default), colors alternate per game continuously within the
+    // pairing (across its FENs); when true, each game's colors are drawn from the
+    // injected RNG. `gamesPerFen` is the per-FEN game count in both modes.
     internal static IReadOnlyList<ExpandedGame> ExpandMatrix(
         IReadOnlyList<string> botIds,
         IReadOnlyList<string> fenList,
-        int gamesPerFen)
+        int gamesPerFen,
+        bool randomColors,
+        IArenaRandom random)
     {
         List<ExpandedGame> games = [];
         int order = 0;
@@ -58,7 +62,7 @@ internal static class SetupExpansion
                     string label = FenList.Label(fenIndex, fen);
                     for (int game = 0; game < gamesPerFen; game++)
                     {
-                        bool swap = pairGame % 2 == 1;
+                        bool swap = randomColors ? random.Next(2) == 1 : pairGame % 2 == 1;
                         (string white, string black) = swap
                             ? (botIds[j], botIds[i])
                             : (botIds[i], botIds[j]);

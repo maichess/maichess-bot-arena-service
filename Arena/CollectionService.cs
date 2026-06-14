@@ -37,6 +37,7 @@ internal sealed class CollectionService(
             GamesPerFen = command.GamesPerFen,
             FensPerStage = command.FensPerStage,
             ColorMode = command.ColorMode,
+            MatrixColorMode = command.MatrixColorMode,
             KeepSwitchingColors = command.KeepSwitchingColors,
             TimeFormat = TimeFormatRegistry.Resolve(command.TimeFormatId),
         };
@@ -136,7 +137,12 @@ internal sealed class CollectionService(
                 collection.FenList,
                 collection.GamesPerFen,
                 collection.KeepSwitchingColors)
-            : SetupExpansion.ExpandMatrix(collection.BotIds, collection.FenList, collection.GamesPerFen);
+            : SetupExpansion.ExpandMatrix(
+                collection.BotIds,
+                collection.FenList,
+                collection.GamesPerFen,
+                collection.MatrixColorMode == MatrixColorMode.Random,
+                randomProvider.ForStage(collection.Id, round: 0, pairing: 0));
 
         foreach (ExpandedGame game in expanded)
         {

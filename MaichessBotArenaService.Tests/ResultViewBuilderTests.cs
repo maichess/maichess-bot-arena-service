@@ -135,7 +135,7 @@ public sealed class ResultViewBuilderTests
 
         CreateCollectionCommand command = new(
             "T", "creator", SetupKind.Tournament, [.. bots.Split(',')], string.Empty, string.Empty,
-            ["standard"], 1, 1, mode, false, "5+0");
+            ["standard"], 1, 1, mode, MatrixColorMode.Alternating, false, "5+0");
         CreateCollectionResult result = await service.CreateAsync(command, CancellationToken.None);
         string id = ((CreateCollectionResult.Success)result).Collection.Id;
 

@@ -20,7 +20,17 @@ internal sealed class SetupExpansionSteps(ExpansionContext context)
     public void WhenAMatrixSetupExpands(string bots, string fens, int gamesPerFen)
     {
         context.Games = SetupExpansion.ExpandMatrix(
-            SplitTokens(bots), ExpansionContext.MapFens(fens), gamesPerFen);
+            SplitTokens(bots), ExpansionContext.MapFens(fens), gamesPerFen,
+            randomColors: false, new FakeArenaRandom(0));
+    }
+
+    [When(@"a matrix setup expands bots ""([^""]*)"" over FENs ""([^""]*)"" with (\d+) games per FEN in random mode with RNG ""([^""]*)""")]
+    public void WhenAMatrixSetupExpandsRandom(string bots, string fens, int gamesPerFen, string rng)
+    {
+        int[] values = [.. rng.Split(',').Select(value => int.Parse(value, CultureInfo.InvariantCulture))];
+        context.Games = SetupExpansion.ExpandMatrix(
+            SplitTokens(bots), ExpansionContext.MapFens(fens), gamesPerFen,
+            randomColors: true, new FakeArenaRandom(values));
     }
 
     [When(@"a tournament stage expands bots ""([^""]*)"" and ""([^""]*)"" over FENs ""([^""]*)"" in both-colors mode")]

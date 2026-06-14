@@ -32,6 +32,8 @@ internal sealed class ArenaCollection
 
     public TournamentColorMode ColorMode { get; set; }
 
+    public MatrixColorMode MatrixColorMode { get; set; }
+
     public bool KeepSwitchingColors { get; set; }
 
     public TimeFormatInfo TimeFormat { get; set; } = new(string.Empty, 0, 0, string.Empty);

@@ -41,3 +41,32 @@ projector (`Kafka/MatchEndedFactory`) from the live read model it already holds
 at match end. `Kafka/ArenaMatchCompletionProjection` maps them straight into
 `MatchOutcome`, so all tie-break rungs keep full fidelity with no gRPC call.
 Events written before 0.11.0 leave the fields at `0` / empty (backward compatible).
+
+## Pending publish — matrix `color_mode` (contracts 0.12.0, task 20)
+
+`MatrixConfig` gained a `MatrixColorMode color_mode = 5` field
+(`MATRIX_COLOR_MODE_ALTERNATING` default / `MATRIX_COLOR_MODE_RANDOM`) plus REST
+docs for the matrix `color_mode` body field. **Handoff:** commit + tag the
+contracts repo as **`v0.12.0`** and push so `Maichess.PlatformProtos` publishes,
+then bump the pin platform-wide (every `*.csproj` / `build.sbt`) to `0.12.0`. This
+service consumes the arena contract over **REST**, not via generated arena
+proto types, so it builds and tests green at the current `0.11.0` pin — the bump
+is convention/alignment only and is not a compile blocker here.
+
+### Interpretation: `games_per_fen` stays the count authority in both modes
+
+Task `20`'s table/labels frame matrix `color_mode` as a game-*count* switch
+("Alternate ×2 / Random ×1", "the count will halve"). That conflicts with the
+same spec's "Alternating (default): keep the existing behavior" and with the
+established matrix semantics (existing tests assert `games_per_fen` games per
+`(pair, FEN)` with alternating colors). Implementing a count change would silently
+double existing alternating output and make `games_per_fen` ambiguous.
+
+Resolved (color-strategy interpretation): **`color_mode` changes only how colors
+are *assigned*, never how many games are spawned.** `games_per_fen` is the per-FEN
+game count in both modes; `alternating` swaps colors deterministically (unchanged),
+`random` draws each game's colors from the per-collection arena RNG. The spec's
+"×2 vs ×1 / halve" framing is the natural outcome of choosing an even
+`games_per_fen` for balanced alternating coverage vs. a smaller `games_per_fen`
+for a quick random series — not a behavior baked into the mode. This keeps the
+change additive and fully backward compatible.

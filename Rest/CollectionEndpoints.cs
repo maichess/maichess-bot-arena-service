@@ -98,6 +98,7 @@ internal static class CollectionEndpoints
                 0,
                 tournament.FensPerStage,
                 tournament.ColorMode == "random" ? TournamentColorMode.Random : TournamentColorMode.BothColors,
+                MatrixColorMode.Alternating,
                 false,
                 tournament.TimeFormatId ?? string.Empty);
         }
@@ -115,6 +116,7 @@ internal static class CollectionEndpoints
                 matrix.GamesPerFen,
                 0,
                 TournamentColorMode.BothColors,
+                matrix.ColorMode == "random" ? MatrixColorMode.Random : MatrixColorMode.Alternating,
                 false,
                 matrix.TimeFormatId ?? string.Empty);
         }
@@ -131,6 +133,7 @@ internal static class CollectionEndpoints
             single.GamesPerFen,
             0,
             TournamentColorMode.BothColors,
+            MatrixColorMode.Alternating,
             single.KeepSwitchingColors,
             single.TimeFormatId ?? string.Empty);
     }

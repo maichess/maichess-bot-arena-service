@@ -13,5 +13,6 @@ internal sealed record CreateCollectionCommand(
     int GamesPerFen,
     int FensPerStage,
     TournamentColorMode ColorMode,
+    MatrixColorMode MatrixColorMode,
     bool KeepSwitchingColors,
     string TimeFormatId);

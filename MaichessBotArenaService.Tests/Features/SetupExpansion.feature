@@ -44,6 +44,24 @@ Feature: Setup expansion
       | 0     | a     | b     | Standard |
       | 1     | b     | a     | FEN 2    |
 
+  Scenario: Matrix random mode assigns each game's colors from the RNG
+    When a matrix setup expands bots "a,b" over FENs "standard" with 3 games per FEN in random mode with RNG "0,1,1"
+    Then the expansion produces:
+      | order | white | black | label    |
+      | 0     | a     | b     | Standard |
+      | 1     | b     | a     | Standard |
+      | 2     | b     | a     | Standard |
+
+  Scenario: Matrix random mode keeps games_per_fen as the game count
+    When a matrix setup expands bots "a,b,c" over FENs "standard" with 1 games per FEN in random mode with RNG "0"
+    Then the expansion has 3 games
+    And the expansion covers 3 distinct unordered pairs
+    And the expansion produces:
+      | order | white | black | label    |
+      | 0     | a     | b     | Standard |
+      | 1     | a     | c     | Standard |
+      | 2     | b     | c     | Standard |
+
   Scenario: Tournament stage both-colors plays each FEN twice swapping colors
     When a tournament stage expands bots "a" and "b" over FENs "standard,posB" in both-colors mode
     Then the expansion produces:

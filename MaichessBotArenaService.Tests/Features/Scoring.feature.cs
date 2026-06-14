@@ -111,28 +111,28 @@ namespace MaichessBotArenaService.Tests.Features
             else
             {
                 await this.ScenarioStartAsync();
-                global::Reqnroll.Table table26 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table27 = new global::Reqnroll.Table(new string[] {
                             "white",
                             "black",
                             "outcome"});
-                table26.AddRow(new string[] {
+                table27.AddRow(new string[] {
                             "a",
                             "b",
                             "white_won"});
-                table26.AddRow(new string[] {
+                table27.AddRow(new string[] {
                             "a",
                             "b",
                             "black_won"});
-                table26.AddRow(new string[] {
+                table27.AddRow(new string[] {
                             "a",
                             "b",
                             "draw"});
-                table26.AddRow(new string[] {
+                table27.AddRow(new string[] {
                             "a",
                             "b",
                             "ongoing"});
 #line 6
-    await testRunner.GivenAsync("the stage games:", ((string)(null)), table26, "Given ");
+    await testRunner.GivenAsync("the stage games:", ((string)(null)), table27, "Given ");
 #line hidden
 #line 12
     await testRunner.ThenAsync("bot \"a\" has 1.5 points", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
@@ -165,24 +165,24 @@ namespace MaichessBotArenaService.Tests.Features
             else
             {
                 await this.ScenarioStartAsync();
-                global::Reqnroll.Table table27 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table28 = new global::Reqnroll.Table(new string[] {
                             "white",
                             "black",
                             "outcome"});
-                table27.AddRow(new string[] {
+                table28.AddRow(new string[] {
                             "a",
                             "b",
                             "white_won"});
-                table27.AddRow(new string[] {
+                table28.AddRow(new string[] {
                             "b",
                             "a",
                             "black_won"});
-                table27.AddRow(new string[] {
+                table28.AddRow(new string[] {
                             "a",
                             "b",
                             "white_won"});
 #line 17
-    await testRunner.GivenAsync("the stage games:", ((string)(null)), table27, "Given ");
+    await testRunner.GivenAsync("the stage games:", ((string)(null)), table28, "Given ");
 #line hidden
 #line 22
     await testRunner.ThenAsync("bot \"a\" has 3 points", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");

@@ -37,6 +37,7 @@ internal sealed class CollectionLifecycleSteps(CollectionContext context)
             int.Parse(Get("games_per_fen", "1"), CultureInfo.InvariantCulture),
             int.Parse(Get("fens_per_stage", "1"), CultureInfo.InvariantCulture),
             Get("mode", "both") == "random" ? TournamentColorMode.Random : TournamentColorMode.BothColors,
+            Get("matrix_mode", "alternating") == "random" ? MatrixColorMode.Random : MatrixColorMode.Alternating,
             Get("switching", "off") == "on",
             Get("time_format", "5+0"));
 

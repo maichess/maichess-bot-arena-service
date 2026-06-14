@@ -140,6 +140,19 @@ Feature: Collection lifecycle
     Then the collection status is "finished"
     And 3 games are finished
 
+  Scenario: A matrix setup in random-colors mode still plays every pair once per game
+    Given the known bots are "a,b,c"
+    When a setup is created:
+      | field         | value  |
+      | kind          | matrix |
+      | bots          | a,b,c  |
+      | games_per_fen | 1      |
+      | matrix_mode   | random |
+    Then the collection has 3 games
+    When the setup runs to completion with white always winning
+    Then the collection status is "finished"
+    And 3 games are finished
+
   # ── Tournament ────────────────────────────────────────────────────────────────
 
   Scenario: A four-bot tournament runs through two rounds to a champion

@@ -714,15 +714,15 @@ namespace MaichessBotArenaService.Tests.Features
             await this.ScenarioCleanupAsync();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="A four-bot tournament runs through two rounds to a champion")]
+        [Xunit.SkippableFactAttribute(DisplayName="A matrix setup in random-colors mode still plays every pair once per game")]
         [Xunit.TraitAttribute("FeatureTitle", "Collection lifecycle")]
-        [Xunit.TraitAttribute("Description", "A four-bot tournament runs through two rounds to a champion")]
-        public async System.Threading.Tasks.Task AFour_BotTournamentRunsThroughTwoRoundsToAChampion()
+        [Xunit.TraitAttribute("Description", "A matrix setup in random-colors mode still plays every pair once per game")]
+        public async System.Threading.Tasks.Task AMatrixSetupInRandom_ColorsModeStillPlaysEveryPairOncePerGame()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("A four-bot tournament runs through two rounds to a champion", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 145
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("A matrix setup in random-colors mode still plays every pair once per game", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 143
   this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -732,37 +732,92 @@ namespace MaichessBotArenaService.Tests.Features
             else
             {
                 await this.ScenarioStartAsync();
-#line 146
-    await testRunner.GivenAsync("the known bots are \"a,b,c,d\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+#line 144
+    await testRunner.GivenAsync("the known bots are \"a,b,c\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
                 global::Reqnroll.Table table19 = new global::Reqnroll.Table(new string[] {
                             "field",
                             "value"});
                 table19.AddRow(new string[] {
                             "kind",
-                            "tournament"});
+                            "matrix"});
                 table19.AddRow(new string[] {
                             "bots",
-                            "a,b,c,d"});
+                            "a,b,c"});
                 table19.AddRow(new string[] {
-                            "fens_per_stage",
+                            "games_per_fen",
                             "1"});
-#line 147
+                table19.AddRow(new string[] {
+                            "matrix_mode",
+                            "random"});
+#line 145
     await testRunner.WhenAsync("a setup is created:", ((string)(null)), table19, "When ");
 #line hidden
-#line 152
-    await testRunner.ThenAsync("the collection has 4 games", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line 151
+    await testRunner.ThenAsync("the collection has 3 games", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
-#line 153
+#line 152
     await testRunner.WhenAsync("the setup runs to completion with white always winning", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 154
+#line 153
     await testRunner.ThenAsync("the collection status is \"finished\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
-#line 155
+#line 154
+    await testRunner.AndAsync("3 games are finished", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+            }
+            await this.ScenarioCleanupAsync();
+        }
+        
+        [Xunit.SkippableFactAttribute(DisplayName="A four-bot tournament runs through two rounds to a champion")]
+        [Xunit.TraitAttribute("FeatureTitle", "Collection lifecycle")]
+        [Xunit.TraitAttribute("Description", "A four-bot tournament runs through two rounds to a champion")]
+        public async System.Threading.Tasks.Task AFour_BotTournamentRunsThroughTwoRoundsToAChampion()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("A four-bot tournament runs through two rounds to a champion", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 158
+  this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                await this.ScenarioStartAsync();
+#line 159
+    await testRunner.GivenAsync("the known bots are \"a,b,c,d\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+#line hidden
+                global::Reqnroll.Table table20 = new global::Reqnroll.Table(new string[] {
+                            "field",
+                            "value"});
+                table20.AddRow(new string[] {
+                            "kind",
+                            "tournament"});
+                table20.AddRow(new string[] {
+                            "bots",
+                            "a,b,c,d"});
+                table20.AddRow(new string[] {
+                            "fens_per_stage",
+                            "1"});
+#line 160
+    await testRunner.WhenAsync("a setup is created:", ((string)(null)), table20, "When ");
+#line hidden
+#line 165
+    await testRunner.ThenAsync("the collection has 4 games", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
+#line 166
+    await testRunner.WhenAsync("the setup runs to completion with white always winning", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line hidden
+#line 167
+    await testRunner.ThenAsync("the collection status is \"finished\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
+#line 168
     await testRunner.AndAsync("the collection winner is \"a\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-#line 156
+#line 169
     await testRunner.AndAsync("the collection has 6 games", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
             }
@@ -777,7 +832,7 @@ namespace MaichessBotArenaService.Tests.Features
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("A three-bot tournament gives the top seed a bye", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 158
+#line 171
   this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -787,34 +842,34 @@ namespace MaichessBotArenaService.Tests.Features
             else
             {
                 await this.ScenarioStartAsync();
-#line 159
+#line 172
     await testRunner.GivenAsync("the known bots are \"a,b,c\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-                global::Reqnroll.Table table20 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table21 = new global::Reqnroll.Table(new string[] {
                             "field",
                             "value"});
-                table20.AddRow(new string[] {
+                table21.AddRow(new string[] {
                             "kind",
                             "tournament"});
-                table20.AddRow(new string[] {
+                table21.AddRow(new string[] {
                             "bots",
                             "a,b,c"});
-                table20.AddRow(new string[] {
+                table21.AddRow(new string[] {
                             "fens_per_stage",
                             "1"});
-#line 160
-    await testRunner.WhenAsync("a setup is created:", ((string)(null)), table20, "When ");
+#line 173
+    await testRunner.WhenAsync("a setup is created:", ((string)(null)), table21, "When ");
 #line hidden
-#line 165
+#line 178
     await testRunner.ThenAsync("the collection has 2 games", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
-#line 166
+#line 179
     await testRunner.WhenAsync("the setup runs to completion with white always winning", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 167
+#line 180
     await testRunner.ThenAsync("the collection status is \"finished\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
-#line 168
+#line 181
     await testRunner.AndAsync("the collection winner is \"a\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
             }
@@ -829,7 +884,7 @@ namespace MaichessBotArenaService.Tests.Features
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("A tournament in random-colors mode plays one game per stage", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 170
+#line 183
   this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -839,37 +894,37 @@ namespace MaichessBotArenaService.Tests.Features
             else
             {
                 await this.ScenarioStartAsync();
-#line 171
+#line 184
     await testRunner.GivenAsync("the known bots are \"a,b,c,d\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-                global::Reqnroll.Table table21 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table22 = new global::Reqnroll.Table(new string[] {
                             "field",
                             "value"});
-                table21.AddRow(new string[] {
+                table22.AddRow(new string[] {
                             "kind",
                             "tournament"});
-                table21.AddRow(new string[] {
+                table22.AddRow(new string[] {
                             "bots",
                             "a,b,c,d"});
-                table21.AddRow(new string[] {
+                table22.AddRow(new string[] {
                             "fens_per_stage",
                             "1"});
-                table21.AddRow(new string[] {
+                table22.AddRow(new string[] {
                             "mode",
                             "random"});
-#line 172
-    await testRunner.WhenAsync("a setup is created:", ((string)(null)), table21, "When ");
+#line 185
+    await testRunner.WhenAsync("a setup is created:", ((string)(null)), table22, "When ");
 #line hidden
-#line 178
+#line 191
     await testRunner.ThenAsync("the collection has 2 games", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
-#line 179
+#line 192
     await testRunner.WhenAsync("the setup runs to completion with white always winning", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 180
+#line 193
     await testRunner.ThenAsync("the collection winner is \"a\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
-#line 181
+#line 194
     await testRunner.AndAsync("the collection has 3 games", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
             }
@@ -884,7 +939,7 @@ namespace MaichessBotArenaService.Tests.Features
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("The cap limits how many games of one setup run at once", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 185
+#line 198
   this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -894,31 +949,31 @@ namespace MaichessBotArenaService.Tests.Features
             else
             {
                 await this.ScenarioStartAsync();
-#line 186
+#line 199
     await testRunner.GivenAsync("the known bots are \"a,b\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-#line 187
+#line 200
     await testRunner.AndAsync("the concurrency limit is 2", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-                global::Reqnroll.Table table22 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table23 = new global::Reqnroll.Table(new string[] {
                             "field",
                             "value"});
-                table22.AddRow(new string[] {
+                table23.AddRow(new string[] {
                             "white",
                             "a"});
-                table22.AddRow(new string[] {
+                table23.AddRow(new string[] {
                             "black",
                             "b"});
-                table22.AddRow(new string[] {
+                table23.AddRow(new string[] {
                             "games_per_fen",
                             "6"});
-#line 188
-    await testRunner.WhenAsync("a setup is created:", ((string)(null)), table22, "When ");
+#line 201
+    await testRunner.WhenAsync("a setup is created:", ((string)(null)), table23, "When ");
 #line hidden
-#line 193
+#line 206
     await testRunner.ThenAsync("2 games are running", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
-#line 194
+#line 207
     await testRunner.AndAsync("4 games are pending", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
             }
@@ -933,7 +988,7 @@ namespace MaichessBotArenaService.Tests.Features
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("A new setup waits when the cap is already saturated", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 196
+#line 209
   this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -943,26 +998,11 @@ namespace MaichessBotArenaService.Tests.Features
             else
             {
                 await this.ScenarioStartAsync();
-#line 197
+#line 210
     await testRunner.GivenAsync("the known bots are \"a,b\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-#line 198
+#line 211
     await testRunner.AndAsync("the concurrency limit is 1", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
-#line hidden
-                global::Reqnroll.Table table23 = new global::Reqnroll.Table(new string[] {
-                            "field",
-                            "value"});
-                table23.AddRow(new string[] {
-                            "white",
-                            "a"});
-                table23.AddRow(new string[] {
-                            "black",
-                            "b"});
-                table23.AddRow(new string[] {
-                            "games_per_fen",
-                            "2"});
-#line 199
-    await testRunner.WhenAsync("a setup is created:", ((string)(null)), table23, "When ");
 #line hidden
                 global::Reqnroll.Table table24 = new global::Reqnroll.Table(new string[] {
                             "field",
@@ -976,16 +1016,31 @@ namespace MaichessBotArenaService.Tests.Features
                 table24.AddRow(new string[] {
                             "games_per_fen",
                             "2"});
-#line 204
-    await testRunner.AndAsync("a setup is created:", ((string)(null)), table24, "And ");
+#line 212
+    await testRunner.WhenAsync("a setup is created:", ((string)(null)), table24, "When ");
 #line hidden
-#line 209
+                global::Reqnroll.Table table25 = new global::Reqnroll.Table(new string[] {
+                            "field",
+                            "value"});
+                table25.AddRow(new string[] {
+                            "white",
+                            "a"});
+                table25.AddRow(new string[] {
+                            "black",
+                            "b"});
+                table25.AddRow(new string[] {
+                            "games_per_fen",
+                            "2"});
+#line 217
+    await testRunner.AndAsync("a setup is created:", ((string)(null)), table25, "And ");
+#line hidden
+#line 222
     await testRunner.ThenAsync("the collection status is \"pending\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
-#line 210
+#line 223
     await testRunner.AndAsync("0 games are running", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-#line 211
+#line 224
     await testRunner.AndAsync("2 games are pending", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
             }
@@ -1000,7 +1055,7 @@ namespace MaichessBotArenaService.Tests.Features
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Collections can be listed and fetched", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 215
+#line 228
   this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -1010,37 +1065,37 @@ namespace MaichessBotArenaService.Tests.Features
             else
             {
                 await this.ScenarioStartAsync();
-#line 216
+#line 229
     await testRunner.GivenAsync("the known bots are \"a,b\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-                global::Reqnroll.Table table25 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table26 = new global::Reqnroll.Table(new string[] {
                             "field",
                             "value"});
-                table25.AddRow(new string[] {
+                table26.AddRow(new string[] {
                             "white",
                             "a"});
-                table25.AddRow(new string[] {
+                table26.AddRow(new string[] {
                             "black",
                             "b"});
-#line 217
-    await testRunner.WhenAsync("a setup is created:", ((string)(null)), table25, "When ");
+#line 230
+    await testRunner.WhenAsync("a setup is created:", ((string)(null)), table26, "When ");
 #line hidden
-#line 221
+#line 234
     await testRunner.AndAsync("collections are listed with status \"\" limit 0 offset 0", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-#line 222
+#line 235
     await testRunner.ThenAsync("1 collections are listed", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
-#line 223
+#line 236
     await testRunner.WhenAsync("collections are listed with status \"running\" limit 5 offset 0", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 224
+#line 237
     await testRunner.ThenAsync("1 collections are listed", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
-#line 225
+#line 238
     await testRunner.WhenAsync("the collection is fetched", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 226
+#line 239
     await testRunner.ThenAsync("the fetch returns the collection with its games", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
@@ -1055,7 +1110,7 @@ namespace MaichessBotArenaService.Tests.Features
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Fetching a missing collection returns nothing", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 228
+#line 241
   this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -1065,10 +1120,10 @@ namespace MaichessBotArenaService.Tests.Features
             else
             {
                 await this.ScenarioStartAsync();
-#line 229
+#line 242
     await testRunner.WhenAsync("a missing collection \"nope\" is fetched", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 230
+#line 243
     await testRunner.ThenAsync("the fetch returns nothing", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
@@ -1083,7 +1138,7 @@ namespace MaichessBotArenaService.Tests.Features
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Finishing a game whose collection is gone is a no-op", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 232
+#line 245
   this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -1093,10 +1148,10 @@ namespace MaichessBotArenaService.Tests.Features
             else
             {
                 await this.ScenarioStartAsync();
-#line 233
+#line 246
     await testRunner.WhenAsync("a finished game for a missing collection is handled", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 234
+#line 247
     await testRunner.ThenAsync("no games were launched", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }

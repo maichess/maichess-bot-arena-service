@@ -167,6 +167,7 @@ internal sealed class ArenaStore(Database.DatabaseClient db) : IArenaStore
         s.Fields["games_per_fen"] = Value.ForNumber(collection.GamesPerFen);
         s.Fields["fens_per_stage"] = Value.ForNumber(collection.FensPerStage);
         s.Fields["color_mode"] = Value.ForString(collection.ColorMode.ToString());
+        s.Fields["matrix_color_mode"] = Value.ForString(collection.MatrixColorMode.ToString());
         s.Fields["keep_switching_colors"] = Value.ForBool(collection.KeepSwitchingColors);
         s.Fields["time_format_id"] = Value.ForString(collection.TimeFormat.Id);
         s.Fields["time_format_base_ms"] = Value.ForNumber(collection.TimeFormat.BaseMs);
@@ -193,6 +194,9 @@ internal sealed class ArenaStore(Database.DatabaseClient db) : IArenaStore
         GamesPerFen = (int)s.Fields["games_per_fen"].NumberValue,
         FensPerStage = (int)s.Fields["fens_per_stage"].NumberValue,
         ColorMode = System.Enum.Parse<TournamentColorMode>(s.Fields["color_mode"].StringValue),
+        MatrixColorMode = s.Fields.TryGetValue("matrix_color_mode", out Value? matrixColorMode)
+            ? System.Enum.Parse<MatrixColorMode>(matrixColorMode.StringValue)
+            : MatrixColorMode.Alternating,
         KeepSwitchingColors = s.Fields["keep_switching_colors"].BoolValue,
         TimeFormat = new TimeFormatInfo(
             s.Fields["time_format_id"].StringValue,
