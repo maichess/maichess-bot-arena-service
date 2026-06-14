@@ -8,3 +8,4 @@ riderModule.iml
 Load-Env.ps1
 .env_prod
 MaichessBotArenaService.Tests/coverage.json
+MaichessBotArenaService.Tests/coverage.cobertura.xml

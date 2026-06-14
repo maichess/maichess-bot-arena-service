@@ -42,16 +42,18 @@ at match end. `Kafka/ArenaMatchCompletionProjection` maps them straight into
 `MatchOutcome`, so all tie-break rungs keep full fidelity with no gRPC call.
 Events written before 0.11.0 leave the fields at `0` / empty (backward compatible).
 
-## Pending publish — matrix `color_mode` (contracts 0.12.0, task 20)
+## Resolved — matrix `color_mode` (contracts 0.12.0, task 20)
 
 `MatrixConfig` gained a `MatrixColorMode color_mode = 5` field
 (`MATRIX_COLOR_MODE_ALTERNATING` default / `MATRIX_COLOR_MODE_RANDOM`) plus REST
-docs for the matrix `color_mode` body field. **Handoff:** commit + tag the
-contracts repo as **`v0.12.0`** and push so `Maichess.PlatformProtos` publishes,
-then bump the pin platform-wide (every `*.csproj` / `build.sbt`) to `0.12.0`. This
-service consumes the arena contract over **REST**, not via generated arena
-proto types, so it builds and tests green at the current `0.11.0` pin — the bump
-is convention/alignment only and is not a compile blocker here.
+docs for the matrix `color_mode` body field. The contracts repo was tagged and
+published as **`v0.12.0`**, and `Maichess.PlatformProtos` was bumped `0.11.0 →
+0.12.0` across the C# fleet (all `*.csproj`) plus the contract source. The Scala
+services (engine, move-validator @ `0.10.0`) and npm consumers (auth, socket) were
+left as-is — they don't consume the arena proto, matching the scope of the prior
+`0.11.0` bump. This service consumes the arena contract over **REST**, not via
+generated arena proto types, so it built and tested green at the prior `0.11.0`
+pin — the bump is convention/alignment only.
 
 ### Interpretation: `games_per_fen` stays the count authority in both modes
 
