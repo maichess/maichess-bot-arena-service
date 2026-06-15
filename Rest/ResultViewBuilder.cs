@@ -158,7 +158,15 @@ internal sealed class ResultViewBuilder(IArenaRandomProvider randomProvider)
         new(game.WhiteBotId, game.BlackBotId, game.Outcome, game.WhiteTimeMs, game.BlackTimeMs, game.FinalFen);
 
     private static GameResult ToGameResult(ArenaGame game) =>
-        new(game.MatchId, game.Fen, game.FenLabel, game.WhiteBotId, game.BlackBotId, ResultName(game.Outcome), game.Order);
+        new(
+            game.MatchId,
+            game.Fen,
+            game.FenLabel,
+            game.WhiteBotId,
+            game.BlackBotId,
+            ResultName(game.Outcome),
+            game.Order,
+            game.Status);
 
     private static string TypeName(SetupKind kind) => kind switch
     {

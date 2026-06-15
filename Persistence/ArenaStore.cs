@@ -114,6 +114,15 @@ internal sealed class ArenaStore(Database.DatabaseClient db) : IArenaStore
         return [.. response.Records.Select(ToGame).OrderBy(game => game.Order)];
     }
 
+    public async Task<IReadOnlyList<ArenaGame>> ListPendingGamesAsync(CancellationToken ct)
+    {
+        Struct filter = new();
+        filter.Fields["status"] = Value.ForString("pending");
+        ListResponse response = await db.ListAsync(
+            new ListRequest { Collection = GamesCollection, Filter = filter }, cancellationToken: ct);
+        return [.. response.Records.Select(ToGame)];
+    }
+
     public async Task<int> CountRunningGamesAsync(CancellationToken ct)
     {
         Struct filter = new();

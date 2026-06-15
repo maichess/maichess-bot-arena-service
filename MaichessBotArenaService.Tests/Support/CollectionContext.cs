@@ -25,6 +25,10 @@ internal sealed class CollectionContext
 
     internal (ArenaCollection Collection, IReadOnlyList<ArenaGame> Games)? Fetched { get; set; }
 
+    // Ids of the collections created in the scenario, in creation order, so steps
+    // can refer to "the first / second setup" when several exist.
+    internal List<string> CreatedIds { get; } = [];
+
     internal CollectionContext()
     {
         IMemoryCache cache = new MemoryCache(Options.Create(new MemoryCacheOptions()));

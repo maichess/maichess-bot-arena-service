@@ -35,8 +35,19 @@ internal static class CollectionViews
 
     internal sealed record Progress(int TotalGames, int FinishedGames, int RunningGames, int PendingGames);
 
+    // Status is the arena scheduler state of this game (pending | running |
+    // finished), distinct from Result (the match outcome, "ongoing" until the
+    // game ends): it lets the client show a queued game as "pending" and only a
+    // launched one as "live".
     internal sealed record GameResult(
-        string MatchId, string Fen, string FenLabel, string WhiteBotId, string BlackBotId, string Result, int Order);
+        string MatchId,
+        string Fen,
+        string FenLabel,
+        string WhiteBotId,
+        string BlackBotId,
+        string Result,
+        int Order,
+        string Status);
 
     internal sealed record SingleSeries(
         string BotAId, string BotBId, double BotAScore, double BotBScore, IReadOnlyList<GameResult> Games);

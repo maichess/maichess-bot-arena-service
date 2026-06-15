@@ -111,24 +111,24 @@ namespace MaichessBotArenaService.Tests.Features
             else
             {
                 await this.ScenarioStartAsync();
-                global::Reqnroll.Table table38 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table47 = new global::Reqnroll.Table(new string[] {
                             "white",
                             "black",
                             "outcome"});
-                table38.AddRow(new string[] {
+                table47.AddRow(new string[] {
                             "a",
                             "b",
                             "white_won"});
-                table38.AddRow(new string[] {
+                table47.AddRow(new string[] {
                             "a",
                             "b",
                             "white_won"});
-                table38.AddRow(new string[] {
+                table47.AddRow(new string[] {
                             "b",
                             "a",
                             "white_won"});
 #line 6
-    await testRunner.GivenAsync("the stage games:", ((string)(null)), table38, "Given ");
+    await testRunner.GivenAsync("the stage games:", ((string)(null)), table47, "Given ");
 #line hidden
 #line 11
     await testRunner.WhenAsync("the stage winner is decided", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
@@ -158,24 +158,24 @@ namespace MaichessBotArenaService.Tests.Features
             else
             {
                 await this.ScenarioStartAsync();
-                global::Reqnroll.Table table39 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table48 = new global::Reqnroll.Table(new string[] {
                             "white",
                             "black",
                             "outcome"});
-                table39.AddRow(new string[] {
+                table48.AddRow(new string[] {
                             "b",
                             "a",
                             "white_won"});
-                table39.AddRow(new string[] {
+                table48.AddRow(new string[] {
                             "b",
                             "a",
                             "white_won"});
-                table39.AddRow(new string[] {
+                table48.AddRow(new string[] {
                             "a",
                             "b",
                             "white_won"});
 #line 15
-    await testRunner.GivenAsync("the stage games:", ((string)(null)), table39, "Given ");
+    await testRunner.GivenAsync("the stage games:", ((string)(null)), table48, "Given ");
 #line hidden
 #line 20
     await testRunner.WhenAsync("the stage winner is decided", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
@@ -205,20 +205,20 @@ namespace MaichessBotArenaService.Tests.Features
             else
             {
                 await this.ScenarioStartAsync();
-                global::Reqnroll.Table table40 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table49 = new global::Reqnroll.Table(new string[] {
                             "white",
                             "black",
                             "outcome"});
-                table40.AddRow(new string[] {
+                table49.AddRow(new string[] {
                             "a",
                             "b",
                             "white_won"});
-                table40.AddRow(new string[] {
+                table49.AddRow(new string[] {
                             "b",
                             "a",
                             "white_won"});
 #line 24
-    await testRunner.GivenAsync("the stage games:", ((string)(null)), table40, "Given ");
+    await testRunner.GivenAsync("the stage games:", ((string)(null)), table49, "Given ");
 #line hidden
 #line 28
     await testRunner.WhenAsync("the stage winner is decided", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
@@ -248,20 +248,20 @@ namespace MaichessBotArenaService.Tests.Features
             else
             {
                 await this.ScenarioStartAsync();
-                global::Reqnroll.Table table41 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table50 = new global::Reqnroll.Table(new string[] {
                             "white",
                             "black",
                             "outcome"});
-                table41.AddRow(new string[] {
+                table50.AddRow(new string[] {
                             "b",
                             "a",
                             "white_won"});
-                table41.AddRow(new string[] {
+                table50.AddRow(new string[] {
                             "a",
                             "b",
                             "white_won"});
 #line 32
-    await testRunner.GivenAsync("the stage games:", ((string)(null)), table41, "Given ");
+    await testRunner.GivenAsync("the stage games:", ((string)(null)), table50, "Given ");
 #line hidden
 #line 36
     await testRunner.WhenAsync("the stage winner is decided", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
@@ -291,20 +291,20 @@ namespace MaichessBotArenaService.Tests.Features
             else
             {
                 await this.ScenarioStartAsync();
-                global::Reqnroll.Table table42 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table51 = new global::Reqnroll.Table(new string[] {
                             "white",
                             "black",
                             "outcome",
                             "whiteMs",
                             "blackMs"});
-                table42.AddRow(new string[] {
+                table51.AddRow(new string[] {
                             "a",
                             "b",
                             "draw",
                             "1000",
                             "500"});
 #line 40
-    await testRunner.GivenAsync("the stage games:", ((string)(null)), table42, "Given ");
+    await testRunner.GivenAsync("the stage games:", ((string)(null)), table51, "Given ");
 #line hidden
 #line 43
     await testRunner.WhenAsync("the stage winner is decided", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
@@ -334,20 +334,20 @@ namespace MaichessBotArenaService.Tests.Features
             else
             {
                 await this.ScenarioStartAsync();
-                global::Reqnroll.Table table43 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table52 = new global::Reqnroll.Table(new string[] {
                             "white",
                             "black",
                             "outcome",
                             "whiteMs",
                             "blackMs"});
-                table43.AddRow(new string[] {
+                table52.AddRow(new string[] {
                             "a",
                             "b",
                             "draw",
                             "500",
                             "1000"});
 #line 47
-    await testRunner.GivenAsync("the stage games:", ((string)(null)), table43, "Given ");
+    await testRunner.GivenAsync("the stage games:", ((string)(null)), table52, "Given ");
 #line hidden
 #line 50
     await testRunner.WhenAsync("the stage winner is decided", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
@@ -377,14 +377,14 @@ namespace MaichessBotArenaService.Tests.Features
             else
             {
                 await this.ScenarioStartAsync();
-                global::Reqnroll.Table table44 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table53 = new global::Reqnroll.Table(new string[] {
                             "white",
                             "black",
                             "outcome",
                             "whiteMs",
                             "blackMs",
                             "fen"});
-                table44.AddRow(new string[] {
+                table53.AddRow(new string[] {
                             "a",
                             "b",
                             "draw",
@@ -392,7 +392,7 @@ namespace MaichessBotArenaService.Tests.Features
                             "0",
                             "Q6k/8/8/8/8/8/8/K7 w - - 0 1"});
 #line 54
-    await testRunner.GivenAsync("the stage games:", ((string)(null)), table44, "Given ");
+    await testRunner.GivenAsync("the stage games:", ((string)(null)), table53, "Given ");
 #line hidden
 #line 57
     await testRunner.WhenAsync("the stage winner is decided", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
@@ -422,14 +422,14 @@ namespace MaichessBotArenaService.Tests.Features
             else
             {
                 await this.ScenarioStartAsync();
-                global::Reqnroll.Table table45 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table54 = new global::Reqnroll.Table(new string[] {
                             "white",
                             "black",
                             "outcome",
                             "whiteMs",
                             "blackMs",
                             "fen"});
-                table45.AddRow(new string[] {
+                table54.AddRow(new string[] {
                             "b",
                             "a",
                             "draw",
@@ -437,7 +437,7 @@ namespace MaichessBotArenaService.Tests.Features
                             "0",
                             "Q6k/8/8/8/8/8/8/K7 w - - 0 1"});
 #line 61
-    await testRunner.GivenAsync("the stage games:", ((string)(null)), table45, "Given ");
+    await testRunner.GivenAsync("the stage games:", ((string)(null)), table54, "Given ");
 #line hidden
 #line 64
     await testRunner.WhenAsync("the stage winner is decided", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
@@ -467,16 +467,16 @@ namespace MaichessBotArenaService.Tests.Features
             else
             {
                 await this.ScenarioStartAsync();
-                global::Reqnroll.Table table46 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table55 = new global::Reqnroll.Table(new string[] {
                             "white",
                             "black",
                             "outcome"});
-                table46.AddRow(new string[] {
+                table55.AddRow(new string[] {
                             "a",
                             "b",
                             "draw"});
 #line 68
-    await testRunner.GivenAsync("the stage games:", ((string)(null)), table46, "Given ");
+    await testRunner.GivenAsync("the stage games:", ((string)(null)), table55, "Given ");
 #line hidden
 #line 71
     await testRunner.AndAsync("the tie-break coin flip yields 0", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
@@ -509,16 +509,16 @@ namespace MaichessBotArenaService.Tests.Features
             else
             {
                 await this.ScenarioStartAsync();
-                global::Reqnroll.Table table47 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table56 = new global::Reqnroll.Table(new string[] {
                             "white",
                             "black",
                             "outcome"});
-                table47.AddRow(new string[] {
+                table56.AddRow(new string[] {
                             "a",
                             "b",
                             "draw"});
 #line 76
-    await testRunner.GivenAsync("the stage games:", ((string)(null)), table47, "Given ");
+    await testRunner.GivenAsync("the stage games:", ((string)(null)), table56, "Given ");
 #line hidden
 #line 79
     await testRunner.AndAsync("the tie-break coin flip yields 1", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");

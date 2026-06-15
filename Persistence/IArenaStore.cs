@@ -34,6 +34,11 @@ internal interface IArenaStore
     // Returns all games of a collection in expansion order.
     Task<IReadOnlyList<ArenaGame>> ListGamesAsync(string collectionId, CancellationToken ct);
 
+    // Lists all games in the "pending" state across all collections. Used by the
+    // global capacity reconcile to find queued games to launch when capacity
+    // frees, regardless of which collection owns them.
+    Task<IReadOnlyList<ArenaGame>> ListPendingGamesAsync(CancellationToken ct);
+
     // Counts games in the "running" state across all collections (the global
     // in-flight count for the concurrency cap).
     Task<int> CountRunningGamesAsync(CancellationToken ct);

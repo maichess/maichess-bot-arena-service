@@ -114,28 +114,28 @@ namespace MaichessBotArenaService.Tests.Features
     await testRunner.WhenAsync(("a single setup expands white \"w\" black \"b\" over FENs \"standard\" with 3 games per " +
                         "FEN and color switching off"), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-                global::Reqnroll.Table table29 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table38 = new global::Reqnroll.Table(new string[] {
                             "order",
                             "white",
                             "black",
                             "label"});
-                table29.AddRow(new string[] {
+                table38.AddRow(new string[] {
                             "0",
                             "w",
                             "b",
                             "Standard"});
-                table29.AddRow(new string[] {
+                table38.AddRow(new string[] {
                             "1",
                             "w",
                             "b",
                             "Standard"});
-                table29.AddRow(new string[] {
+                table38.AddRow(new string[] {
                             "2",
                             "w",
                             "b",
                             "Standard"});
 #line 6
-    await testRunner.ThenAsync("the expansion produces:", ((string)(null)), table29, "Then ");
+    await testRunner.ThenAsync("the expansion produces:", ((string)(null)), table38, "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
@@ -163,33 +163,33 @@ namespace MaichessBotArenaService.Tests.Features
     await testRunner.WhenAsync(("a single setup expands white \"w\" black \"b\" over FENs \"standard\" with 4 games per " +
                         "FEN and color switching on"), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-                global::Reqnroll.Table table30 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table39 = new global::Reqnroll.Table(new string[] {
                             "order",
                             "white",
                             "black",
                             "label"});
-                table30.AddRow(new string[] {
+                table39.AddRow(new string[] {
                             "0",
                             "w",
                             "b",
                             "Standard"});
-                table30.AddRow(new string[] {
+                table39.AddRow(new string[] {
                             "1",
                             "b",
                             "w",
                             "Standard"});
-                table30.AddRow(new string[] {
+                table39.AddRow(new string[] {
                             "2",
                             "w",
                             "b",
                             "Standard"});
-                table30.AddRow(new string[] {
+                table39.AddRow(new string[] {
                             "3",
                             "b",
                             "w",
                             "Standard"});
 #line 14
-    await testRunner.ThenAsync("the expansion produces:", ((string)(null)), table30, "Then ");
+    await testRunner.ThenAsync("the expansion produces:", ((string)(null)), table39, "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
@@ -217,23 +217,23 @@ namespace MaichessBotArenaService.Tests.Features
     await testRunner.WhenAsync(("a single setup expands white \"w\" black \"b\" over FENs \"standard,posB\" with 1 games" +
                         " per FEN and color switching on"), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-                global::Reqnroll.Table table31 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table40 = new global::Reqnroll.Table(new string[] {
                             "order",
                             "white",
                             "black",
                             "label"});
-                table31.AddRow(new string[] {
+                table40.AddRow(new string[] {
                             "0",
                             "w",
                             "b",
                             "Standard"});
-                table31.AddRow(new string[] {
+                table40.AddRow(new string[] {
                             "1",
                             "b",
                             "w",
                             "FEN 2"});
 #line 23
-    await testRunner.ThenAsync("the expansion produces:", ((string)(null)), table31, "Then ");
+    await testRunner.ThenAsync("the expansion produces:", ((string)(null)), table40, "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
@@ -292,23 +292,23 @@ namespace MaichessBotArenaService.Tests.Features
 #line 34
     await testRunner.WhenAsync("a matrix setup expands bots \"a,b\" over FENs \"standard\" with 2 games per FEN", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-                global::Reqnroll.Table table32 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table41 = new global::Reqnroll.Table(new string[] {
                             "order",
                             "white",
                             "black",
                             "label"});
-                table32.AddRow(new string[] {
+                table41.AddRow(new string[] {
                             "0",
                             "a",
                             "b",
                             "Standard"});
-                table32.AddRow(new string[] {
+                table41.AddRow(new string[] {
                             "1",
                             "b",
                             "a",
                             "Standard"});
 #line 35
-    await testRunner.ThenAsync("the expansion produces:", ((string)(null)), table32, "Then ");
+    await testRunner.ThenAsync("the expansion produces:", ((string)(null)), table41, "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
@@ -335,23 +335,23 @@ namespace MaichessBotArenaService.Tests.Features
 #line 41
     await testRunner.WhenAsync("a matrix setup expands bots \"a,b\" over FENs \"standard,posB\" with 1 games per FEN", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-                global::Reqnroll.Table table33 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table42 = new global::Reqnroll.Table(new string[] {
                             "order",
                             "white",
                             "black",
                             "label"});
-                table33.AddRow(new string[] {
+                table42.AddRow(new string[] {
                             "0",
                             "a",
                             "b",
                             "Standard"});
-                table33.AddRow(new string[] {
+                table42.AddRow(new string[] {
                             "1",
                             "b",
                             "a",
                             "FEN 2"});
 #line 42
-    await testRunner.ThenAsync("the expansion produces:", ((string)(null)), table33, "Then ");
+    await testRunner.ThenAsync("the expansion produces:", ((string)(null)), table42, "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
@@ -379,28 +379,28 @@ namespace MaichessBotArenaService.Tests.Features
     await testRunner.WhenAsync(("a matrix setup expands bots \"a,b\" over FENs \"standard\" with 3 games per FEN in ra" +
                         "ndom mode with RNG \"0,1,1\""), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-                global::Reqnroll.Table table34 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table43 = new global::Reqnroll.Table(new string[] {
                             "order",
                             "white",
                             "black",
                             "label"});
-                table34.AddRow(new string[] {
+                table43.AddRow(new string[] {
                             "0",
                             "a",
                             "b",
                             "Standard"});
-                table34.AddRow(new string[] {
+                table43.AddRow(new string[] {
                             "1",
                             "b",
                             "a",
                             "Standard"});
-                table34.AddRow(new string[] {
+                table43.AddRow(new string[] {
                             "2",
                             "b",
                             "a",
                             "Standard"});
 #line 49
-    await testRunner.ThenAsync("the expansion produces:", ((string)(null)), table34, "Then ");
+    await testRunner.ThenAsync("the expansion produces:", ((string)(null)), table43, "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
@@ -434,28 +434,28 @@ namespace MaichessBotArenaService.Tests.Features
 #line 58
     await testRunner.AndAsync("the expansion covers 3 distinct unordered pairs", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-                global::Reqnroll.Table table35 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table44 = new global::Reqnroll.Table(new string[] {
                             "order",
                             "white",
                             "black",
                             "label"});
-                table35.AddRow(new string[] {
+                table44.AddRow(new string[] {
                             "0",
                             "a",
                             "b",
                             "Standard"});
-                table35.AddRow(new string[] {
+                table44.AddRow(new string[] {
                             "1",
                             "a",
                             "c",
                             "Standard"});
-                table35.AddRow(new string[] {
+                table44.AddRow(new string[] {
                             "2",
                             "b",
                             "c",
                             "Standard"});
 #line 59
-    await testRunner.AndAsync("the expansion produces:", ((string)(null)), table35, "And ");
+    await testRunner.AndAsync("the expansion produces:", ((string)(null)), table44, "And ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
@@ -483,33 +483,33 @@ namespace MaichessBotArenaService.Tests.Features
     await testRunner.WhenAsync(("a tournament stage expands bots \"a\" and \"b\" over FENs \"standard,posB\" in both-col" +
                         "ors mode"), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-                global::Reqnroll.Table table36 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table45 = new global::Reqnroll.Table(new string[] {
                             "order",
                             "white",
                             "black",
                             "label"});
-                table36.AddRow(new string[] {
+                table45.AddRow(new string[] {
                             "0",
                             "a",
                             "b",
                             "Standard"});
-                table36.AddRow(new string[] {
+                table45.AddRow(new string[] {
                             "1",
                             "b",
                             "a",
                             "Standard"});
-                table36.AddRow(new string[] {
+                table45.AddRow(new string[] {
                             "2",
                             "a",
                             "b",
                             "FEN 2"});
-                table36.AddRow(new string[] {
+                table45.AddRow(new string[] {
                             "3",
                             "b",
                             "a",
                             "FEN 2"});
 #line 67
-    await testRunner.ThenAsync("the expansion produces:", ((string)(null)), table36, "Then ");
+    await testRunner.ThenAsync("the expansion produces:", ((string)(null)), table45, "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
@@ -537,23 +537,23 @@ namespace MaichessBotArenaService.Tests.Features
     await testRunner.WhenAsync(("a tournament stage expands bots \"a\" and \"b\" over FENs \"standard,posB\" in random m" +
                         "ode with RNG \"0,1\""), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-                global::Reqnroll.Table table37 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table46 = new global::Reqnroll.Table(new string[] {
                             "order",
                             "white",
                             "black",
                             "label"});
-                table37.AddRow(new string[] {
+                table46.AddRow(new string[] {
                             "0",
                             "a",
                             "b",
                             "Standard"});
-                table37.AddRow(new string[] {
+                table46.AddRow(new string[] {
                             "1",
                             "b",
                             "a",
                             "FEN 2"});
 #line 76
-    await testRunner.ThenAsync("the expansion produces:", ((string)(null)), table37, "Then ");
+    await testRunner.ThenAsync("the expansion produces:", ((string)(null)), table46, "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();

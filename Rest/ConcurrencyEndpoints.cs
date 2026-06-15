@@ -22,8 +22,10 @@ internal static class ConcurrencyEndpoints
     }
 
     private static async Task<IResult> SetLimit(
-        [FromBody] SetConcurrencyRequest body, ArenaSettingsService service, CancellationToken ct)
+        [FromBody] SetConcurrencyRequest body, CollectionService service, CancellationToken ct)
     {
+        // Goes through CollectionService (not ArenaSettingsService) so raising the
+        // limit immediately fills the new headroom with queued games.
         SetConcurrencyLimitResult result = await service.SetConcurrencyLimitAsync(body.Limit, ct);
         return result switch
         {

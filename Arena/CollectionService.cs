@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using MaichessBotArenaService.Domain;
 using MaichessBotArenaService.Persistence;
 
@@ -13,8 +14,19 @@ internal sealed class CollectionService(
     IBotCatalog catalog,
     ArenaSettingsService settings,
     IArenaRandomProvider randomProvider,
-    Func<long> clock)
+    Func<long> clock) : IDisposable
 {
+    // Serializes the global capacity reconcile. Several games can finish in one
+    // poll tick, and creation / limit changes can race with them; without this a
+    // concurrent reconcile could read the same running count twice and launch
+    // past the cap.
+    private readonly SemaphoreSlim reconcileLock = new(1, 1);
+
+    // Disposes the reconcile semaphore. The service is a singleton, so this only
+    // runs at application shutdown; excluded as trivial lifecycle plumbing.
+    [ExcludeFromCodeCoverage]
+    public void Dispose() => reconcileLock.Dispose();
+
     internal async Task<CreateCollectionResult> CreateAsync(CreateCollectionCommand command, CancellationToken ct)
     {
         string? error = await ValidateAsync(command, ct);
@@ -50,7 +62,7 @@ internal sealed class CollectionService(
         collection = await store.InsertCollectionAsync(collection, ct);
 
         await AdvanceAsync(collection, ct);
-        await LaunchCollectionAsync(collection, ct);
+        await FillAvailableCapacityAsync(ct);
 
         return new CreateCollectionResult.Success(collection);
     }
@@ -66,13 +78,86 @@ internal sealed class CollectionService(
         await store.UpdateGameAsync(game, ct);
 
         ArenaCollection? collection = await store.GetCollectionAsync(game.CollectionId, ct);
-        if (collection is null)
+        if (collection is not null)
         {
-            return;
+            await AdvanceAsync(collection, ct);
         }
 
-        await AdvanceAsync(collection, ct);
-        await LaunchCollectionAsync(collection, ct);
+        // Reconcile the whole arena, not just the finishing collection: the freed
+        // slot may belong to an older collection that was queued behind the cap.
+        await FillAvailableCapacityAsync(ct);
+    }
+
+    // Updates the global concurrency limit and, when it is raised, immediately
+    // fills the new headroom with queued games. Lowering it launches nothing;
+    // in-flight games drain naturally until running <= cap.
+    internal async Task<SetConcurrencyLimitResult> SetConcurrencyLimitAsync(int limit, CancellationToken ct)
+    {
+        int previous = await settings.GetConcurrencyLimitAsync(ct);
+        SetConcurrencyLimitResult result = await settings.SetConcurrencyLimitAsync(limit, ct);
+
+        if (result is SetConcurrencyLimitResult.Success && limit > previous)
+        {
+            await FillAvailableCapacityAsync(ct);
+        }
+
+        return result;
+    }
+
+    // One global reconcile step: launch queued games up to the global cap,
+    // oldest collection first (FIFO across collections, then by game order).
+    // Serialized so concurrent completions / creates / limit changes can never
+    // launch past the cap.
+    internal async Task FillAvailableCapacityAsync(CancellationToken ct)
+    {
+        await reconcileLock.WaitAsync(ct);
+        try
+        {
+            int cap = await settings.GetConcurrencyLimitAsync(ct);
+            int running = await store.CountRunningGamesAsync(ct);
+            IReadOnlyList<ArenaGame> pending = await store.ListPendingGamesAsync(ct);
+
+            // Spare capacity below the global cap, clamped to what is waiting. The
+            // reconcile is serialized, so running only changes inside this loop and
+            // the budget stays exact.
+            int budget = LaunchPlanner.LaunchableCount(cap, running, pending.Count);
+            if (budget == 0)
+            {
+                return;
+            }
+
+            Dictionary<string, ArenaCollection> owners = await ResolveOwnersAsync(pending, ct);
+            HashSet<string> promoted = [];
+            int launched = 0;
+
+            foreach (ArenaGame game in OrderFifo(pending, owners))
+            {
+                if (launched >= budget)
+                {
+                    break;
+                }
+
+                ArenaCollection collection = owners[game.CollectionId];
+                await LaunchGameAsync(collection, game, ct);
+                launched++;
+
+                if (collection.Status == "pending")
+                {
+                    promoted.Add(collection.Id);
+                }
+            }
+
+            foreach (string id in promoted)
+            {
+                ArenaCollection collection = owners[id];
+                collection.Status = "running";
+                await store.UpdateCollectionAsync(collection, ct);
+            }
+        }
+        finally
+        {
+            reconcileLock.Release();
+        }
     }
 
     internal Task<IReadOnlyList<ArenaCollection>> ListAsync(string? status, int limit, int offset, CancellationToken ct) =>
@@ -168,29 +253,40 @@ internal sealed class CollectionService(
         }
     }
 
-    private async Task LaunchCollectionAsync(ArenaCollection collection, CancellationToken ct)
+    // Resolves the owning collection of every pending game (only collections that
+    // actually have queued games, so the reconcile never scans finished history).
+    private async Task<Dictionary<string, ArenaCollection>> ResolveOwnersAsync(
+        IReadOnlyList<ArenaGame> pending, CancellationToken ct)
     {
-        int cap = await settings.GetConcurrencyLimitAsync(ct);
-        int running = await store.CountRunningGamesAsync(ct);
-
-        List<ArenaGame> pending =
-            [.. (await store.ListGamesAsync(collection.Id, ct)).Where(game => game.Status == "pending")];
-        int launchable = LaunchPlanner.LaunchableCount(cap, running, pending.Count);
-
-        foreach (ArenaGame game in pending.Take(launchable))
+        Dictionary<string, ArenaCollection> owners = [];
+        foreach (string collectionId in pending.Select(game => game.CollectionId).Distinct())
         {
-            string startFen = game.Fen == FenList.StandardFen ? string.Empty : game.Fen;
-            game.MatchId = await launcher.LaunchAsync(
-                game.WhiteBotId, game.BlackBotId, collection.TimeFormat.Id, startFen, collection.CreatedBy, ct);
-            game.Status = "running";
-            await store.UpdateGameAsync(game, ct);
+            ArenaCollection? collection = await store.GetCollectionAsync(collectionId, ct);
+            if (collection is not null)
+            {
+                owners[collectionId] = collection;
+            }
         }
 
-        if (collection.Status == "pending" && launchable > 0)
-        {
-            collection.Status = "running";
-            await store.UpdateCollectionAsync(collection, ct);
-        }
+        return owners;
+    }
+
+    // FIFO across collections: oldest collection (by created_at) first, then by
+    // the game's expansion order within that collection.
+    private static IEnumerable<ArenaGame> OrderFifo(
+        IReadOnlyList<ArenaGame> pending, Dictionary<string, ArenaCollection> owners) =>
+        pending
+            .Where(game => owners.ContainsKey(game.CollectionId))
+            .OrderBy(game => owners[game.CollectionId].CreatedAtMs)
+            .ThenBy(game => game.Order);
+
+    private async Task LaunchGameAsync(ArenaCollection collection, ArenaGame game, CancellationToken ct)
+    {
+        string startFen = game.Fen == FenList.StandardFen ? string.Empty : game.Fen;
+        game.MatchId = await launcher.LaunchAsync(
+            game.WhiteBotId, game.BlackBotId, collection.TimeFormat.Id, startFen, collection.CreatedBy, ct);
+        game.Status = "running";
+        await store.UpdateGameAsync(game, ct);
     }
 
     private TournamentBracket.BracketState EvaluateBracket(ArenaCollection collection, IReadOnlyList<ArenaGame> games) =>

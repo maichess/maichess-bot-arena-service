@@ -35,6 +35,7 @@ public sealed class ResultViewBuilderTests
         Assert.Equal(1.5, detail.Result.SingleSeries!.BotAScore);
         Assert.Equal(1.5, detail.Result.SingleSeries.BotBScore);
         Assert.Equal(["white_won", "black_won", "draw", "ongoing"], detail.Result.SingleSeries.Games.Select(game => game.Result));
+        Assert.Equal(["finished", "finished", "finished", "running"], detail.Result.SingleSeries.Games.Select(game => game.Status));
         Assert.Equal(4, detail.Progress.TotalGames);
         Assert.Equal(3, detail.Progress.FinishedGames);
         Assert.Equal(1, detail.Progress.RunningGames);

@@ -114,20 +114,20 @@ namespace MaichessBotArenaService.Tests.Features
 #line 8
     await testRunner.GivenAsync("the known bots are \"a,b\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-                global::Reqnroll.Table table5 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table14 = new global::Reqnroll.Table(new string[] {
                             "field",
                             "value"});
-                table5.AddRow(new string[] {
+                table14.AddRow(new string[] {
                             "name",
                             ""});
-                table5.AddRow(new string[] {
+                table14.AddRow(new string[] {
                             "white",
                             "a"});
-                table5.AddRow(new string[] {
+                table14.AddRow(new string[] {
                             "black",
                             "b"});
 #line 9
-    await testRunner.WhenAsync("a setup is created:", ((string)(null)), table5, "When ");
+    await testRunner.WhenAsync("a setup is created:", ((string)(null)), table14, "When ");
 #line hidden
 #line 14
     await testRunner.ThenAsync("the create result is invalid input \"name is required\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
@@ -157,20 +157,20 @@ namespace MaichessBotArenaService.Tests.Features
 #line 17
     await testRunner.GivenAsync("the known bots are \"a,b\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-                global::Reqnroll.Table table6 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table15 = new global::Reqnroll.Table(new string[] {
                             "field",
                             "value"});
-                table6.AddRow(new string[] {
+                table15.AddRow(new string[] {
                             "white",
                             "a"});
-                table6.AddRow(new string[] {
+                table15.AddRow(new string[] {
                             "black",
                             "b"});
-                table6.AddRow(new string[] {
+                table15.AddRow(new string[] {
                             "time_format",
                             "99+99"});
 #line 18
-    await testRunner.WhenAsync("a setup is created:", ((string)(null)), table6, "When ");
+    await testRunner.WhenAsync("a setup is created:", ((string)(null)), table15, "When ");
 #line hidden
 #line 23
     await testRunner.ThenAsync("the create result is invalid input \"unknown time_format_id\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
@@ -200,17 +200,17 @@ namespace MaichessBotArenaService.Tests.Features
 #line 26
     await testRunner.GivenAsync("the known bots are \"a,b\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-                global::Reqnroll.Table table7 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table16 = new global::Reqnroll.Table(new string[] {
                             "field",
                             "value"});
-                table7.AddRow(new string[] {
+                table16.AddRow(new string[] {
                             "white",
                             "a"});
-                table7.AddRow(new string[] {
+                table16.AddRow(new string[] {
                             "black",
                             ""});
 #line 27
-    await testRunner.WhenAsync("a setup is created:", ((string)(null)), table7, "When ");
+    await testRunner.WhenAsync("a setup is created:", ((string)(null)), table16, "When ");
 #line hidden
 #line 31
     await testRunner.ThenAsync("the create result is invalid input \"white_bot_id and black_bot_id are required\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
@@ -240,17 +240,17 @@ namespace MaichessBotArenaService.Tests.Features
 #line 34
     await testRunner.GivenAsync("the known bots are \"a,b\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-                global::Reqnroll.Table table8 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table17 = new global::Reqnroll.Table(new string[] {
                             "field",
                             "value"});
-                table8.AddRow(new string[] {
+                table17.AddRow(new string[] {
                             "white",
                             "a"});
-                table8.AddRow(new string[] {
+                table17.AddRow(new string[] {
                             "black",
                             "z"});
 #line 35
-    await testRunner.WhenAsync("a setup is created:", ((string)(null)), table8, "When ");
+    await testRunner.WhenAsync("a setup is created:", ((string)(null)), table17, "When ");
 #line hidden
 #line 39
     await testRunner.ThenAsync("the create result is invalid input \"unknown bot_id\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
@@ -280,17 +280,17 @@ namespace MaichessBotArenaService.Tests.Features
 #line 42
     await testRunner.GivenAsync("the known bots are \"a,b\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-                global::Reqnroll.Table table9 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table18 = new global::Reqnroll.Table(new string[] {
                             "field",
                             "value"});
-                table9.AddRow(new string[] {
+                table18.AddRow(new string[] {
                             "white",
                             ""});
-                table9.AddRow(new string[] {
+                table18.AddRow(new string[] {
                             "black",
                             "b"});
 #line 43
-    await testRunner.WhenAsync("a setup is created:", ((string)(null)), table9, "When ");
+    await testRunner.WhenAsync("a setup is created:", ((string)(null)), table18, "When ");
 #line hidden
 #line 47
     await testRunner.ThenAsync("the create result is invalid input \"white_bot_id and black_bot_id are required\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
@@ -320,17 +320,17 @@ namespace MaichessBotArenaService.Tests.Features
 #line 50
     await testRunner.GivenAsync("the known bots are \"a,b\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-                global::Reqnroll.Table table10 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table19 = new global::Reqnroll.Table(new string[] {
                             "field",
                             "value"});
-                table10.AddRow(new string[] {
+                table19.AddRow(new string[] {
                             "white",
                             "z"});
-                table10.AddRow(new string[] {
+                table19.AddRow(new string[] {
                             "black",
                             "b"});
 #line 51
-    await testRunner.WhenAsync("a setup is created:", ((string)(null)), table10, "When ");
+    await testRunner.WhenAsync("a setup is created:", ((string)(null)), table19, "When ");
 #line hidden
 #line 55
     await testRunner.ThenAsync("the create result is invalid input \"unknown bot_id\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
@@ -360,20 +360,20 @@ namespace MaichessBotArenaService.Tests.Features
 #line 58
     await testRunner.GivenAsync("the known bots are \"a,b\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-                global::Reqnroll.Table table11 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table20 = new global::Reqnroll.Table(new string[] {
                             "field",
                             "value"});
-                table11.AddRow(new string[] {
+                table20.AddRow(new string[] {
                             "white",
                             "a"});
-                table11.AddRow(new string[] {
+                table20.AddRow(new string[] {
                             "black",
                             "b"});
-                table11.AddRow(new string[] {
+                table20.AddRow(new string[] {
                             "games_per_fen",
                             "0"});
 #line 59
-    await testRunner.WhenAsync("a setup is created:", ((string)(null)), table11, "When ");
+    await testRunner.WhenAsync("a setup is created:", ((string)(null)), table20, "When ");
 #line hidden
 #line 64
     await testRunner.ThenAsync("the create result is invalid input \"games_per_fen must be at least 1\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
@@ -403,17 +403,17 @@ namespace MaichessBotArenaService.Tests.Features
 #line 67
     await testRunner.GivenAsync("the known bots are \"a,b\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-                global::Reqnroll.Table table12 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table21 = new global::Reqnroll.Table(new string[] {
                             "field",
                             "value"});
-                table12.AddRow(new string[] {
+                table21.AddRow(new string[] {
                             "kind",
                             "matrix"});
-                table12.AddRow(new string[] {
+                table21.AddRow(new string[] {
                             "bots",
                             "a"});
 #line 68
-    await testRunner.WhenAsync("a setup is created:", ((string)(null)), table12, "When ");
+    await testRunner.WhenAsync("a setup is created:", ((string)(null)), table21, "When ");
 #line hidden
 #line 72
     await testRunner.ThenAsync("the create result is invalid input \"at least 2 bots are required\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
@@ -443,17 +443,17 @@ namespace MaichessBotArenaService.Tests.Features
 #line 75
     await testRunner.GivenAsync("the known bots are \"a,b\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-                global::Reqnroll.Table table13 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table22 = new global::Reqnroll.Table(new string[] {
                             "field",
                             "value"});
-                table13.AddRow(new string[] {
+                table22.AddRow(new string[] {
                             "kind",
                             "matrix"});
-                table13.AddRow(new string[] {
+                table22.AddRow(new string[] {
                             "bots",
                             "a,z"});
 #line 76
-    await testRunner.WhenAsync("a setup is created:", ((string)(null)), table13, "When ");
+    await testRunner.WhenAsync("a setup is created:", ((string)(null)), table22, "When ");
 #line hidden
 #line 80
     await testRunner.ThenAsync("the create result is invalid input \"unknown bot_id\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
@@ -483,20 +483,20 @@ namespace MaichessBotArenaService.Tests.Features
 #line 83
     await testRunner.GivenAsync("the known bots are \"a,b\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-                global::Reqnroll.Table table14 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table23 = new global::Reqnroll.Table(new string[] {
                             "field",
                             "value"});
-                table14.AddRow(new string[] {
+                table23.AddRow(new string[] {
                             "kind",
                             "matrix"});
-                table14.AddRow(new string[] {
+                table23.AddRow(new string[] {
                             "bots",
                             "a,b"});
-                table14.AddRow(new string[] {
+                table23.AddRow(new string[] {
                             "games_per_fen",
                             "0"});
 #line 84
-    await testRunner.WhenAsync("a setup is created:", ((string)(null)), table14, "When ");
+    await testRunner.WhenAsync("a setup is created:", ((string)(null)), table23, "When ");
 #line hidden
 #line 89
     await testRunner.ThenAsync("the create result is invalid input \"games_per_fen must be at least 1\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
@@ -526,20 +526,20 @@ namespace MaichessBotArenaService.Tests.Features
 #line 92
     await testRunner.GivenAsync("the known bots are \"a,b\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-                global::Reqnroll.Table table15 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table24 = new global::Reqnroll.Table(new string[] {
                             "field",
                             "value"});
-                table15.AddRow(new string[] {
+                table24.AddRow(new string[] {
                             "kind",
                             "tournament"});
-                table15.AddRow(new string[] {
+                table24.AddRow(new string[] {
                             "bots",
                             "a,b"});
-                table15.AddRow(new string[] {
+                table24.AddRow(new string[] {
                             "fens_per_stage",
                             "0"});
 #line 93
-    await testRunner.WhenAsync("a setup is created:", ((string)(null)), table15, "When ");
+    await testRunner.WhenAsync("a setup is created:", ((string)(null)), table24, "When ");
 #line hidden
 #line 98
     await testRunner.ThenAsync("the create result is invalid input \"fens_per_stage must be at least 1\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
@@ -569,23 +569,23 @@ namespace MaichessBotArenaService.Tests.Features
 #line 103
     await testRunner.GivenAsync("the known bots are \"a,b\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-                global::Reqnroll.Table table16 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table25 = new global::Reqnroll.Table(new string[] {
                             "field",
                             "value"});
-                table16.AddRow(new string[] {
+                table25.AddRow(new string[] {
                             "white",
                             "a"});
-                table16.AddRow(new string[] {
+                table25.AddRow(new string[] {
                             "black",
                             "b"});
-                table16.AddRow(new string[] {
+                table25.AddRow(new string[] {
                             "games_per_fen",
                             "4"});
-                table16.AddRow(new string[] {
+                table25.AddRow(new string[] {
                             "switching",
                             "on"});
 #line 104
-    await testRunner.WhenAsync("a setup is created:", ((string)(null)), table16, "When ");
+    await testRunner.WhenAsync("a setup is created:", ((string)(null)), table25, "When ");
 #line hidden
 #line 110
     await testRunner.ThenAsync("the create result is success", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
@@ -636,23 +636,23 @@ namespace MaichessBotArenaService.Tests.Features
 #line 120
     await testRunner.GivenAsync("the known bots are \"a,b\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-                global::Reqnroll.Table table17 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table26 = new global::Reqnroll.Table(new string[] {
                             "field",
                             "value"});
-                table17.AddRow(new string[] {
+                table26.AddRow(new string[] {
                             "white",
                             "a"});
-                table17.AddRow(new string[] {
+                table26.AddRow(new string[] {
                             "black",
                             "b"});
-                table17.AddRow(new string[] {
+                table26.AddRow(new string[] {
                             "games_per_fen",
                             "1"});
-                table17.AddRow(new string[] {
+                table26.AddRow(new string[] {
                             "fens",
                             "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq c6 0 2"});
 #line 121
-    await testRunner.WhenAsync("a setup is created:", ((string)(null)), table17, "When ");
+    await testRunner.WhenAsync("a setup is created:", ((string)(null)), table26, "When ");
 #line hidden
 #line 127
     await testRunner.ThenAsync(("a game was launched with start_fen \"rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKB" +
@@ -683,20 +683,20 @@ namespace MaichessBotArenaService.Tests.Features
 #line 132
     await testRunner.GivenAsync("the known bots are \"a,b,c\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-                global::Reqnroll.Table table18 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table27 = new global::Reqnroll.Table(new string[] {
                             "field",
                             "value"});
-                table18.AddRow(new string[] {
+                table27.AddRow(new string[] {
                             "kind",
                             "matrix"});
-                table18.AddRow(new string[] {
+                table27.AddRow(new string[] {
                             "bots",
                             "a,b,c"});
-                table18.AddRow(new string[] {
+                table27.AddRow(new string[] {
                             "games_per_fen",
                             "1"});
 #line 133
-    await testRunner.WhenAsync("a setup is created:", ((string)(null)), table18, "When ");
+    await testRunner.WhenAsync("a setup is created:", ((string)(null)), table27, "When ");
 #line hidden
 #line 138
     await testRunner.ThenAsync("the collection has 3 games", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
@@ -735,23 +735,23 @@ namespace MaichessBotArenaService.Tests.Features
 #line 144
     await testRunner.GivenAsync("the known bots are \"a,b,c\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-                global::Reqnroll.Table table19 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table28 = new global::Reqnroll.Table(new string[] {
                             "field",
                             "value"});
-                table19.AddRow(new string[] {
+                table28.AddRow(new string[] {
                             "kind",
                             "matrix"});
-                table19.AddRow(new string[] {
+                table28.AddRow(new string[] {
                             "bots",
                             "a,b,c"});
-                table19.AddRow(new string[] {
+                table28.AddRow(new string[] {
                             "games_per_fen",
                             "1"});
-                table19.AddRow(new string[] {
+                table28.AddRow(new string[] {
                             "matrix_mode",
                             "random"});
 #line 145
-    await testRunner.WhenAsync("a setup is created:", ((string)(null)), table19, "When ");
+    await testRunner.WhenAsync("a setup is created:", ((string)(null)), table28, "When ");
 #line hidden
 #line 151
     await testRunner.ThenAsync("the collection has 3 games", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
@@ -790,20 +790,20 @@ namespace MaichessBotArenaService.Tests.Features
 #line 159
     await testRunner.GivenAsync("the known bots are \"a,b,c,d\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-                global::Reqnroll.Table table20 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table29 = new global::Reqnroll.Table(new string[] {
                             "field",
                             "value"});
-                table20.AddRow(new string[] {
+                table29.AddRow(new string[] {
                             "kind",
                             "tournament"});
-                table20.AddRow(new string[] {
+                table29.AddRow(new string[] {
                             "bots",
                             "a,b,c,d"});
-                table20.AddRow(new string[] {
+                table29.AddRow(new string[] {
                             "fens_per_stage",
                             "1"});
 #line 160
-    await testRunner.WhenAsync("a setup is created:", ((string)(null)), table20, "When ");
+    await testRunner.WhenAsync("a setup is created:", ((string)(null)), table29, "When ");
 #line hidden
 #line 165
     await testRunner.ThenAsync("the collection has 4 games", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
@@ -845,20 +845,20 @@ namespace MaichessBotArenaService.Tests.Features
 #line 172
     await testRunner.GivenAsync("the known bots are \"a,b,c\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-                global::Reqnroll.Table table21 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table30 = new global::Reqnroll.Table(new string[] {
                             "field",
                             "value"});
-                table21.AddRow(new string[] {
+                table30.AddRow(new string[] {
                             "kind",
                             "tournament"});
-                table21.AddRow(new string[] {
+                table30.AddRow(new string[] {
                             "bots",
                             "a,b,c"});
-                table21.AddRow(new string[] {
+                table30.AddRow(new string[] {
                             "fens_per_stage",
                             "1"});
 #line 173
-    await testRunner.WhenAsync("a setup is created:", ((string)(null)), table21, "When ");
+    await testRunner.WhenAsync("a setup is created:", ((string)(null)), table30, "When ");
 #line hidden
 #line 178
     await testRunner.ThenAsync("the collection has 2 games", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
@@ -897,23 +897,23 @@ namespace MaichessBotArenaService.Tests.Features
 #line 184
     await testRunner.GivenAsync("the known bots are \"a,b,c,d\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-                global::Reqnroll.Table table22 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table31 = new global::Reqnroll.Table(new string[] {
                             "field",
                             "value"});
-                table22.AddRow(new string[] {
+                table31.AddRow(new string[] {
                             "kind",
                             "tournament"});
-                table22.AddRow(new string[] {
+                table31.AddRow(new string[] {
                             "bots",
                             "a,b,c,d"});
-                table22.AddRow(new string[] {
+                table31.AddRow(new string[] {
                             "fens_per_stage",
                             "1"});
-                table22.AddRow(new string[] {
+                table31.AddRow(new string[] {
                             "mode",
                             "random"});
 #line 185
-    await testRunner.WhenAsync("a setup is created:", ((string)(null)), table22, "When ");
+    await testRunner.WhenAsync("a setup is created:", ((string)(null)), table31, "When ");
 #line hidden
 #line 191
     await testRunner.ThenAsync("the collection has 2 games", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
@@ -955,20 +955,20 @@ namespace MaichessBotArenaService.Tests.Features
 #line 200
     await testRunner.AndAsync("the concurrency limit is 2", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-                global::Reqnroll.Table table23 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table32 = new global::Reqnroll.Table(new string[] {
                             "field",
                             "value"});
-                table23.AddRow(new string[] {
+                table32.AddRow(new string[] {
                             "white",
                             "a"});
-                table23.AddRow(new string[] {
+                table32.AddRow(new string[] {
                             "black",
                             "b"});
-                table23.AddRow(new string[] {
+                table32.AddRow(new string[] {
                             "games_per_fen",
                             "6"});
 #line 201
-    await testRunner.WhenAsync("a setup is created:", ((string)(null)), table23, "When ");
+    await testRunner.WhenAsync("a setup is created:", ((string)(null)), table32, "When ");
 #line hidden
 #line 206
     await testRunner.ThenAsync("2 games are running", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
@@ -1004,35 +1004,35 @@ namespace MaichessBotArenaService.Tests.Features
 #line 211
     await testRunner.AndAsync("the concurrency limit is 1", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-                global::Reqnroll.Table table24 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table33 = new global::Reqnroll.Table(new string[] {
                             "field",
                             "value"});
-                table24.AddRow(new string[] {
+                table33.AddRow(new string[] {
                             "white",
                             "a"});
-                table24.AddRow(new string[] {
+                table33.AddRow(new string[] {
                             "black",
                             "b"});
-                table24.AddRow(new string[] {
+                table33.AddRow(new string[] {
                             "games_per_fen",
                             "2"});
 #line 212
-    await testRunner.WhenAsync("a setup is created:", ((string)(null)), table24, "When ");
+    await testRunner.WhenAsync("a setup is created:", ((string)(null)), table33, "When ");
 #line hidden
-                global::Reqnroll.Table table25 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table34 = new global::Reqnroll.Table(new string[] {
                             "field",
                             "value"});
-                table25.AddRow(new string[] {
+                table34.AddRow(new string[] {
                             "white",
                             "a"});
-                table25.AddRow(new string[] {
+                table34.AddRow(new string[] {
                             "black",
                             "b"});
-                table25.AddRow(new string[] {
+                table34.AddRow(new string[] {
                             "games_per_fen",
                             "2"});
 #line 217
-    await testRunner.AndAsync("a setup is created:", ((string)(null)), table25, "And ");
+    await testRunner.AndAsync("a setup is created:", ((string)(null)), table34, "And ");
 #line hidden
 #line 222
     await testRunner.ThenAsync("the collection status is \"pending\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
@@ -1068,17 +1068,17 @@ namespace MaichessBotArenaService.Tests.Features
 #line 229
     await testRunner.GivenAsync("the known bots are \"a,b\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-                global::Reqnroll.Table table26 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table35 = new global::Reqnroll.Table(new string[] {
                             "field",
                             "value"});
-                table26.AddRow(new string[] {
+                table35.AddRow(new string[] {
                             "white",
                             "a"});
-                table26.AddRow(new string[] {
+                table35.AddRow(new string[] {
                             "black",
                             "b"});
 #line 230
-    await testRunner.WhenAsync("a setup is created:", ((string)(null)), table26, "When ");
+    await testRunner.WhenAsync("a setup is created:", ((string)(null)), table35, "When ");
 #line hidden
 #line 234
     await testRunner.AndAsync("collections are listed with status \"\" limit 0 offset 0", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");

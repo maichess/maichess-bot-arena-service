@@ -42,6 +42,21 @@ internal sealed class CollectionLifecycleSteps(CollectionContext context)
             Get("time_format", "5+0"));
 
         context.CreateResult = await context.Service.CreateAsync(command, CancellationToken.None);
+        if (context.CreateResult is CreateCollectionResult.Success success)
+        {
+            context.CreatedIds.Add(success.Collection.Id);
+        }
+    }
+
+    [When(@"the concurrency limit is changed to (\d+)")]
+    public async Task WhenTheConcurrencyLimitIsChangedTo(int limit) =>
+        await context.Service.SetConcurrencyLimitAsync(limit, CancellationToken.None);
+
+    [When("one running game finishes as a white win")]
+    public async Task WhenOneRunningGameFinishes()
+    {
+        ArenaGame running = (await context.Store.ListRunningGamesAsync(CancellationToken.None))[0];
+        await context.Service.HandleFinishedGameAsync(running, WhiteWin, CancellationToken.None);
     }
 
     [When("all running games finish as a white win")]
@@ -124,6 +139,29 @@ internal sealed class CollectionLifecycleSteps(CollectionContext context)
         Assert.Equal(count, games.Count(game => game.Status == status));
     }
 
+    [Then(@"(\d+) games are (pending|running|finished) in total")]
+    public async Task ThenGamesAreInStateInTotal(int count, string status)
+    {
+        int running = (await context.Store.ListRunningGamesAsync(CancellationToken.None)).Count;
+        int pending = (await context.Store.ListPendingGamesAsync(CancellationToken.None)).Count;
+
+        int actual = status switch
+        {
+            "running" => running,
+            "pending" => pending,
+            _ => await CountFinishedAsync(),
+        };
+        Assert.Equal(count, actual);
+    }
+
+    [Then(@"setup (\d+) is ""([^""]*)""")]
+    public async Task ThenSetupIs(int index, string status)
+    {
+        string id = context.CreatedIds[index - 1];
+        ArenaCollection? collection = await context.Store.GetCollectionAsync(id, CancellationToken.None);
+        Assert.Equal(status, collection!.Status);
+    }
+
     [Then(@"the collection has (\d+) games")]
     public async Task ThenTheCollectionHasGames(int count)
     {
@@ -153,6 +191,18 @@ internal sealed class CollectionLifecycleSteps(CollectionContext context)
     [Then("the fetch returns nothing")]
     public void ThenTheFetchReturnsNothing() =>
         Assert.Null(context.Fetched);
+
+    private async Task<int> CountFinishedAsync()
+    {
+        int finished = 0;
+        foreach (string id in context.CreatedIds)
+        {
+            IReadOnlyList<ArenaGame> games = await context.Store.ListGamesAsync(id, CancellationToken.None);
+            finished += games.Count(game => game.Status == "finished");
+        }
+
+        return finished;
+    }
 
     private static IReadOnlyList<string> Split(string csv) =>
         csv.Length == 0 ? [] : [.. csv.Split(',').Select(token => token.Trim())];

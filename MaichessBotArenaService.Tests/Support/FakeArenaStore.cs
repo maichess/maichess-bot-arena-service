@@ -70,6 +70,12 @@ internal sealed class FakeArenaStore : IArenaStore
         return Task.FromResult(result);
     }
 
+    public Task<IReadOnlyList<ArenaGame>> ListPendingGamesAsync(CancellationToken ct)
+    {
+        IReadOnlyList<ArenaGame> result = [.. games.Values.Where(g => g.Status == "pending")];
+        return Task.FromResult(result);
+    }
+
     public Task<int> CountRunningGamesAsync(CancellationToken ct) =>
         Task.FromResult(games.Values.Count(g => g.Status == "running"));
 
